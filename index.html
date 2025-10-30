@@ -12,132 +12,160 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <style>
-      /* FINAL FIX: Aggressive Overflow Management */
-      html, body {
+        /* FINAL FIX: Aggressive Overflow Management */
+        html, body {
             width: 100%;  
             overflow-x: hidden !important;  
-      }
-      body { font-family: 'Poppins', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
-      
-      .theme-light { --bg-primary: #fdfaf6; --bg-secondary: #ffffff; --text-primary: #3d352e; --text-secondary: #475569; --border-color: #e7e0d8; --shadow-color: rgba(99, 102, 241, 0.15); --bg-animated: linear-gradient(135deg, #f5f7fa, #c3cfe2, #e2ebf0); --gradient-border: linear-gradient(145deg, #ec4899, #8b5cf6); --gradient-text: var(--gradient-border); --glow-color: rgba(99, 102, 241, 0.6); }
-      .theme-dark { --bg-primary: #0b1120; --bg-secondary: #1a233b; --text-primary: #e2e8f0; --text-secondary: #94a3b8; --border-color: #334155; --shadow-color: rgba(0, 0, 0, 0.3); --bg-animated: linear-gradient(135deg, #0f2027, #203a43, #2c5364); --gradient-border: linear-gradient(145deg, #22d3ee, #818cf8); --gradient-text: var(--gradient-border); --glow-color: rgba(34, 211, 238, 0.5); }
-      .theme-eye-care { --bg-primary: #2c2520; --bg-secondary: #3b302a; --text-primary: #e0d5ce; --text-secondary: #c5b8b1; --border-color: #5a4b44; --shadow-color: rgba(0, 0, 0, 0.3); --bg-animated: linear-gradient(135deg, #3a2d27, #5c4b41, #3a2d27); --gradient-border: linear-gradient(145deg, #f59e0b, #fbbf24); --gradient-text: var(--gradient-border); --glow-color: rgba(245, 158, 11, 0.6); }
-      
-      body { background-color: var(--bg-primary); color: var(--text-primary); transition: background-color 0.4s ease, color 0.4s ease; }
-      .bg-secondary { background-color: var(--bg-secondary); }
-      .text-secondary { color: var(--text-secondary); }
-      .border-custom { border-color: var(--border-color); }
-      .shadow-custom-lg { box-shadow: 0 25px 50px -12px var(--shadow-color), 0 0 15px var(--shadow-color); }
-      
-      #animated-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-animated); background-size: 200% 200%; z-index: -1; animation: gradient-animation 20s ease infinite; }
-      @keyframes gradient-animation { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-
-      .gradient-border-container { padding: 2px; border-radius: 1.7rem; background: var(--gradient-border); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-      .gradient-border-container:not(.breathing-glow):hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 30px 60px -15px var(--shadow-color); }
-      
-      .gradient-text { background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-      
-      /* Ensure animations don't cause overflow issues */
-      .content-card { opacity: 0; transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
-      .content-card.float-in-left { transform: translateX(-100px) scale(0.95); }
-      .content-card.float-in-right { transform: translateX(100px) scale(0.95); }
-      .content-card.is-visible { opacity: 1; transform: translateX(0) scale(1); }
-
-      @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-      .animate-pulse-custom { animation: pulse 2.5s infinite; }
-      [x-cloak] { display: none !important; }
-
-      .focus-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 99; }
-      .subtle-glow { text-shadow: 0 0 8px var(--glow-color), 0 0 10px var(--glow-color); transition: text-shadow 0.4s ease; }
-
-      .form-input, .form-select {
-          background-color: var(--bg-secondary);
-          border: 1px solid var(--border-color);
-          color: var(--text-primary);
-          transition: all 0.3s ease;
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          appearance: none;
-      }
-      .form-input:focus, .form-select:focus {
-          outline: none;
-          border-color: var(--glow-color);
-          box-shadow: 0 0 0 2px var(--glow-color);
-      }
-      .form-select {
-          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-          background-position: right 0.5rem center;
-          background-repeat: no-repeat;
-          background-size: 1.5em 1.5em;
-          padding-right: 2.5rem;
-      }
-
-      @media (max-width: 768px) {
-          .diagnostic-question-text { font-size: 1rem; line-height: 1.5rem; }
-          .diagnostic-option-text { font-size: 0.9rem; line-height: 1.4rem; padding: 0.75rem !important; }
-      }
-
-      /* PRELIMS PULSE FIXES */
-      .flipper { perspective: 1000px; }
-      .flipper-inner {  
-          position: relative;  
-          transition: transform 0.8s;  
-          transform-style: preserve-3d;
-          height: 100%;  
-      }
-      .flipper.is-flipped .flipper-inner { transform: rotateY(180deg); }
-      .front, .back {  
-          position: absolute;  
-          width: 100%;  
-          height: 100%;  
-          -webkit-backface-visibility: hidden;  
-          backface-visibility: hidden;  
-      }
-      .back { transform: rotateY(180deg); }
-      
-      @keyframes breathing-glow-animation {
-          0% { box-shadow: 0 0 15px 0px var(--glow-color); }
-          50% { box-shadow: 0 0 30px 5px var(--glow-color); }
-          100% { box-shadow: 0 0 15px 0px var(--glow-color); }
-      }
-      .breathing-glow { animation: breathing-glow-animation 4s ease-in-out infinite; }
-
-      /* =============================================== */
-      /* == FIX: Diagnostic Question Overflow & Scroll == */
-      /* =============================================== */
-      /* यह सुनिश्चित करता है कि प्रश्न का लंबा टेक्स्ट सही ढंग से रैप हो और कार्ड को क्षैतिज रूप से न फैलाए। */
-      .diagnostic-question-text {
-        overflow-wrap: break-word; /* आधुनिक ब्राउज़रों के लिए */
-        word-wrap: break-word; /* पुराने ब्राउज़रों के लिए */
-        word-break: break-word; /* लेआउट को टूटने से बचाने के लिए एक और उपाय */
+        }
+        body { font-family: 'Poppins', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
         
-        /* स्क्रॉलिंग व्यवहार के लिए यह मुख्य भाग है। */
-        /* हम प्रश्न क्षेत्र के लिए एक अधिकतम ऊंचाई निर्धारित करते हैं। */
-        max-height: 40vh; /* आप इस मान को समायोजित कर सकते हैं। 40vh का अर्थ है व्यूपोर्ट की ऊंचाई का 40%। */
+        .theme-light { --bg-primary: #fdfaf6; --bg-secondary: #ffffff; --text-primary: #3d352e; --text-secondary: #475569; --border-color: #e7e0d8; --shadow-color: rgba(99, 102, 241, 0.15); --bg-animated: linear-gradient(135deg, #f5f7fa, #c3cfe2, #e2ebf0); --gradient-border: linear-gradient(145deg, #ec4899, #8b5cf6); --gradient-text: var(--gradient-border); --glow-color: rgba(99, 102, 241, 0.6); }
+        .theme-dark { --bg-primary: #0b1120; --bg-secondary: #1a233b; --text-primary: #e2e8f0; --text-secondary: #94a3b8; --border-color: #334155; --shadow-color: rgba(0, 0, 0, 0.3); --bg-animated: linear-gradient(135deg, #0f2027, #203a43, #2c5364); --gradient-border: linear-gradient(145deg, #22d3ee, #818cf8); --gradient-text: var(--gradient-border); --glow-color: rgba(34, 211, 238, 0.5); }
+        .theme-eye-care { --bg-primary: #2c2520; --bg-secondary: #3b302a; --text-primary: #e0d5ce; --text-secondary: #c5b8b1; --border-color: #5a4b44; --shadow-color: rgba(0, 0, 0, 0.3); --bg-animated: linear-gradient(135deg, #3a2d27, #5c4b41, #3a2d27); --gradient-border: linear-gradient(145deg, #f59e0b, #fbbf24); --gradient-text: var(--gradient-border); --glow-color: rgba(245, 158, 11, 0.6); }
         
-        /* जब सामग्री max-height से अधिक हो जाती है, तो एक वर्टिकल स्क्रॉलबार दिखाई देगा। */
-        overflow-y: auto;
+        body { background-color: var(--bg-primary); color: var(--text-primary); transition: background-color 0.4s ease, color 0.4s ease; }
+        .bg-secondary { background-color: var(--bg-secondary); }
+        .text-secondary { color: var(--text-secondary); }
+        .border-custom { border-color: var(--border-color); }
+        .shadow-custom-lg { box-shadow: 0 25px 50px -12px var(--shadow-color), 0 0 15px var(--shadow-color); }
         
-        /* स्क्रॉलबार को टेक्स्ट को ओवरलैप करने से रोकने के लिए दाईं ओर थोड़ी पैडिंग जोड़ें। */
-        padding-right: 1rem;
-      }
-      
-      /* वैकल्पिक: Webkit ब्राउज़रों (Chrome, Safari) के लिए स्क्रॉलबार की उपस्थिति में सुधार करें */
-      .diagnostic-question-text::-webkit-scrollbar {
-        width: 8px;
-      }
-      
-      .diagnostic-question-text::-webkit-scrollbar-track {
-        background: var(--bg-primary);
-        border-radius: 4px;
-      }
-      
-      .diagnostic-question-text::-webkit-scrollbar-thumb {
-        background-color: var(--border-color);
-        border-radius: 4px;
-        border: 2px solid var(--bg-primary);
-      }
-</style>         </div>
+        #animated-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-animated); background-size: 200% 200%; z-index: -1; animation: gradient-animation 20s ease infinite; }
+        @keyframes gradient-animation { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+        .gradient-border-container { padding: 2px; border-radius: 1.7rem; background: var(--gradient-border); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .gradient-border-container:not(.breathing-glow):hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 30px 60px -15px var(--shadow-color); }
+        
+        .gradient-text { background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Ensure animations don't cause overflow issues */
+        .content-card { opacity: 0; transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+        .content-card.float-in-left { transform: translateX(-100px) scale(0.95); }
+        .content-card.float-in-right { transform: translateX(100px) scale(0.95); }
+        .content-card.is-visible { opacity: 1; transform: translateX(0) scale(1); }
+
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .animate-pulse-custom { animation: pulse 2.5s infinite; }
+        [x-cloak] { display: none !important; }
+
+        .focus-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 99; }
+        .subtle-glow { text-shadow: 0 0 8px var(--glow-color), 0 0 10px var(--glow-color); transition: text-shadow 0.4s ease; }
+
+        .form-input, .form-select {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--glow-color);
+            box-shadow: 0 0 0 2px var(--glow-color);
+        }
+        .form-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .diagnostic-question-text { font-size: 1rem; line-height: 1.5rem; }
+            .diagnostic-option-text { font-size: 0.9rem; line-height: 1.4rem; padding: 0.75rem !important; }
+        }
+
+        /* PRELIMS PULSE FIXES */
+        .flipper { perspective: 1000px; }
+        .flipper-inner {  
+            position: relative;  
+            transition: transform 0.8s;  
+            transform-style: preserve-3d;
+            height: 100%;  
+        }
+        .flipper.is-flipped .flipper-inner { transform: rotateY(180deg); }
+        .front, .back {  
+            position: absolute;  
+            width: 100%;  
+            height: 100%;  
+            -webkit-backface-visibility: hidden;  
+            backface-visibility: hidden;  
+        }
+        .back { transform: rotateY(180deg); }
+        
+        @keyframes breathing-glow-animation {
+            0% { box-shadow: 0 0 15px 0px var(--glow-color); }
+            50% { box-shadow: 0 0 30px 5px var(--glow-color); }
+            100% { box-shadow: 0 0 15px 0px var(--glow-color); }
+        }
+        .breathing-glow { animation: breathing-glow-animation 4s ease-in-out infinite; }
+
+        /* ================================================= */
+        /* == START: Diagnostic Question Overflow Fix      == */
+        /* ================================================= */
+
+        /* This class targets the question text area in your diagnostic test modal. */
+        .diagnostic-question-text {
+            /* These properties ensure long text wraps correctly and doesn't expand the card horizontally. */
+            overflow-wrap: break-word; /* For modern browsers */
+            word-wrap: break-word;     /* For older browsers */
+            word-break: break-word;    /* A fallback to prevent layout breaking */
+            
+            /* This is the key part for the scrolling behavior. */
+            /* We set a maximum height for the question area. */
+            max-height: 40vh; /* You can adjust this value. 40vh means 40% of the viewport's height. */
+            
+            /* When the content exceeds max-height, a vertical scrollbar will appear. */
+            overflow-y: auto;
+            
+            /* Add some padding on the right to prevent the scrollbar from overlapping the text. */
+            padding-right: 1rem;
+        }
+        
+        /* Optional: Improve the appearance of the scrollbar for Webkit browsers (Chrome, Safari) */
+        .diagnostic-question-text::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .diagnostic-question-text::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+            border-radius: 4px;
+        }
+        
+        .diagnostic-question-text::-webkit-scrollbar-thumb {
+            background-color: var(--border-color);
+            border-radius: 4px;
+            border: 2px solid var(--bg-primary);
+        }
+
+        /* =============================================== */
+        /* == END: Diagnostic Question Overflow Fix      == */
+        /* =============================================== */
+    </style>
+</head>
+
+<body x-data="site()" :class="theme" @keydown.escape="showDiagnostic = false; showComingSoon = false; showExitMessage = false" x-on:close-diagnostic.window="showDiagnostic = false">
+
+    <div x-show="focusMode" x-transition.opacity.duration.300 class="focus-overlay" x-cloak></div>
+    <div id="animated-bg"></div>
+
+    <header class="bg-secondary/80 backdrop-blur-sm shadow-md fixed w-full top-0 z-[100] transition-all duration-300">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div x-data="{ flipped: false }" @click="flipped = !flipped; setTimeout(() => flipped = false, 2000)" class="flipper cursor-pointer" :class="{ 'is-flipped': flipped }">
+                <div class="flipper-inner" style="width: 200px; height: 50px;">
+                    <div class="front flex items-center">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center shadow-lg">
+                                <span class="text-3xl font-bold text-white">T</span>
+                            </div>
+                            <div>
+                                <h1 class="text-2xl font-bold text-indigo-500">Testology</h1>
+                                <p class="text-xs text-secondary hidden sm:block font-medium subtle-glow">"Two tests a day keep failure away"</p>
+                            </div>
+                        </div>
+                    </div>
                     <div class="back flex items-center">
                         <div class="flex items-center space-x-3">
                             <div class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center shadow-lg"><span class="text-3xl font-bold text-white">🤫</span></div>
@@ -403,7 +431,7 @@
                                   <div class="p-6"><h3 class="text-xl font-semibold mb-2">Video Title 2</h3><p class="text-secondary">Relevant notes for this video.</p></div>
                              </div>
                          </div>
-                         <p class="mt-8 text-lg font-semibold text-indigo-400">Follow us for more: <a href="https://www.youtube.com/@testologyGSQ" target="_blank" class="hover:underline">@testologyGSQ</a></p>
+                       <p class="mt-8 text-lg font-semibold text-indigo-400">Follow us for more: <a href="https://www.youtube.com/@testologyGSQ" target="_blank" class="hover:underline">@testologyGSQ</a></p>
                     </div>
                 </div>
             </section>
@@ -430,11 +458,11 @@
                      <ul class="space-y-4 text-left mb-8">
                          <template x-for="section in activeSections" :key="section.name">
                              <li class="flex items-start space-x-3">
-                                <span class="text-2xl" x-text="section.icon"></span>
-                                <div>
-                                    <h4 class="font-semibold" x-text="section.name"></h4>
-                                    <p class="text-sm text-secondary" x-text="section.description"></p>
-                                </div>
+                                 <span class="text-2xl" x-text="section.icon"></span>
+                                 <div>
+                                     <h4 class="font-semibold" x-text="section.name"></h4>
+                                     <p class="text-sm text-secondary" x-text="section.description"></p>
+                                 </div>
                              </li>
                          </template>
                      </ul>
@@ -573,19 +601,19 @@
     </div>
 
     <div x-show="showExitMessage" 
-        class="fixed inset-0 z-[110] flex items-center justify-center p-4 focus-overlay" 
-        x-cloak 
-        x-transition:enter="transition ease-out duration-300" 
-        x-transition:enter-start="opacity-0" 
-        x-transition:enter-end="opacity-100" 
-        x-transition:leave="transition ease-in duration-200" 
-        x-transition:leave-start="opacity-100" 
-        x-transition:leave-end="opacity-0">
+         class="fixed inset-0 z-[110] flex items-center justify-center p-4 focus-overlay" 
+         x-cloak 
+         x-transition:enter="transition ease-out duration-300" 
+         x-transition:enter-start="opacity-0" 
+         x-transition:enter-end="opacity-100" 
+         x-transition:leave="transition ease-in duration-200" 
+         x-transition:leave-start="opacity-100" 
+         x-transition:leave-end="opacity-0">
         
         <div @click.away="showExitMessage = false" 
-            class="bg-secondary rounded-3xl shadow-custom-lg w-full max-w-sm text-center p-6 border-4 border-indigo-500 relative transform scale-100 transition-all duration-300"
-            :class="{'breathing-glow': showExitMessage}"
-            >
+             class="bg-secondary rounded-3xl shadow-custom-lg w-full max-w-sm text-center p-6 border-4 border-indigo-500 relative transform scale-100 transition-all duration-300"
+             :class="{'breathing-glow': showExitMessage}"
+             >
             <p class="text-lg font-semibold text-primary mb-5 whitespace-pre-line" x-html="exitMessageContent"></p>
             
             <button @click="showExitMessage = false" 
@@ -671,7 +699,7 @@
                         this.exitMessageContent = randomQuote;
                         this.showExitMessage = true;
 
-                        document.removeEventListener('mouseout', this.handleExitIntentBound); 
+                        document.removeEventListener('mouseout', this.handleExitIntentBound);  
                     }
                 },
 
@@ -705,12 +733,12 @@
                 
                 sections: {
                     en: [
-                        { 
+                        {  
                             type: 'mindset',
-                            name: 'Test 1: UPSC Mindset Test', 
-                            icon: '🧠', 
+                            name: 'Test 1: UPSC Mindset Test',  
+                            icon: '🧠',  
                             description: 'This test will assess your Mindset, Patience, and Motivation.',
-                            summaryMessage: "Excellent! Mental fortitude is the first step to success. Your mindset is your greatest asset.", 
+                            summaryMessage: "Excellent! Mental fortitude is the first step to success. Your mindset is your greatest asset.",  
                             questions: [
                                 { question: 'Do you have a very strong reason to become a Civil Servant, which goes beyond just \'Power\', \'Prestige\', or \'Social Status\'?', options: ['Yes', 'No'], correctAnswerIndex: 0, selectedAnswerIndex: null },
                                 { question: 'Can you follow a routine of 6-8 hours of self-study daily for the next 365 days, without any external pressure?', options: ['Yes', 'No'], correctAnswerIndex: 0, selectedAnswerIndex: null },
@@ -722,12 +750,12 @@
                                 { question: 'Are you willing to voluntarily limit your social life, hobbies, and entertainment for the next 1-2 years?', options: ['Yes', 'No'], correctAnswerIndex: 0, selectedAnswerIndex: null },
                                 { question: 'When you study a topic, do questions like \'why\', \'how\', and \'what will be the impact\' naturally arise in your mind?', options: ['Yes', 'No'], correctAnswerIndex: 0, selectedAnswerIndex: null },
                                 { question: 'Do you have the ability to study consistently for 7 hours every day (instead of 14 hours for 2 days and then a 4-day break)?', options: ['Yes', 'No'], correctAnswerIndex: 0, selectedAnswerIndex: null }
-                            ] 
+                            ]  
                         },
-                        { 
+                        {  
                             type: 'litmus',
-                            name: 'Test 2: Newspaper Litmus Test', 
-                            icon: '📰', 
+                            name: 'Test 2: Newspaper Litmus Test',  
+                            icon: '📰',  
                             description: 'This will test whether you see news like a common citizen or an IAS Aspirant.',
                             summaryMessage: "Self-reflection is key. Analyzing how you think is more important than scoring points.",
                             article: {
@@ -752,34 +780,34 @@
                             },
                             questions: []
                         },
-                        { 
+                        {  
                             type: 'mcq',
-                            name: 'Test 3: NCERT Foundation Quiz', 
-                            icon: '📚', 
+                            name: 'Test 3: NCERT Foundation Quiz',  
+                            icon: '📚',  
                             description: 'This test will check how strong your NCERT basics are.',
-                            summaryMessage: "Great! Your foundation is strong. Now it's time to build the rest of the structure.", 
-                            questions: [ 
+                            summaryMessage: "Great! Your foundation is strong. Now it's time to build the rest of the structure.",  
+                            questions: [  
                                 { question: 'In which script were most of Ashoka\'s inscriptions written?', options: ['(A) Sanskrit', '(B) Prakrit', '(C) Brahmi', '(D) Kharosthi'], correctAnswerIndex: 2, selectedAnswerIndex: null },
                                 { question: 'Which layer beneath the Earth\'s crust is made of molten rocks on which the plates float?', options: ['(A) Core', '(B) Mantle', '(C) Outer Crust', '(D) Lithosphere'], correctAnswerIndex: 1, selectedAnswerIndex: null },
                                 { question: 'Which part of the Indian Constitution is called the \'Soul of the Constitution\' but is not legally enforceable?', options: ['(A) Fundamental Rights', '(B) Preamble', '(C) Fundamental Duties', '(D) DPSP'], correctAnswerIndex: 1, selectedAnswerIndex: null },
-                            ] 
+                            ]  
                         },
-                        { 
+                        {  
                             type: 'mcq',
-                            name: 'Test 4: PYQs Challenge', 
-                            icon: '🎯', 
+                            name: 'Test 4: PYQs Challenge',  
+                            icon: '🎯',  
                             description: 'This challenge will test your art of elimination.',
-                            summaryMessage: "Very good! You are starting to understand the pattern of the exam.", 
-                            questions: [ 
+                            summaryMessage: "Very good! You are starting to understand the pattern of the exam.",  
+                            questions: [  
                                 { question: '(UPSC PYQ) In essence, what does \'Due Process of Law\' mean?', options: ['(A) The principle of natural justice', '(B) The procedure established by law', '(C) Fair application of law', '(D) Equality before law'], correctAnswerIndex: 2, selectedAnswerIndex: null },
-                            ] 
+                            ]  
                         },
-                        { 
+                        {  
                             type: 'structure',
-                            name: 'Test 5: The First Step of Answer Writing', 
-                            icon: '✍️', 
+                            name: 'Test 5: The First Step of Answer Writing',  
+                            icon: '✍️',  
                             description: 'This test will assess your ability to create a top-scoring answer structure.',
-                            summaryMessage: "This is a crucial skill. Keep practicing to master it.", 
+                            summaryMessage: "This is a crucial skill. Keep practicing to master it.",  
                             question: {
                                 title: 'Question (GS-2, 150 words):',
                                 text: 'How have the steps taken under the "Digital India Program" helped in the empowerment of citizens? Discuss.'
@@ -809,12 +837,12 @@
                         },
                     ],
                     hi: [
-                        { 
+                        {  
                             type: 'mindset',
-                            name: 'टेस्ट 1: UPSC माइंडसेट टेस्ट', 
-                            icon: '🧠', 
+                            name: 'टेस्ट 1: UPSC माइंडसेट टेस्ट',  
+                            icon: '🧠',  
                             description: 'यह टेस्ट आपके Mindset, धैर्य और Motivation को परखेगा।',
-                            summaryMessage: "बहुत बढ़िया! मानसिक दृढ़ता सफलता की पहली सीढ़ी है। आपका माइंडसेट ही आपकी सबसे बड़ी ताकत है।", 
+                            summaryMessage: "बहुत बढ़िया! मानसिक दृढ़ता सफलता की पहली सीढ़ी है। आपका माइंडसेट ही आपकी सबसे बड़ी ताकत है।",  
                             questions: [
                                 { question: 'क्या आपके पास Civil Servant बनने का कोई एक बहुत मज़बूत कारण है, जो सिर्फ \'Power\', \'Prestige\' या \'Social Status\' से बढ़कर हो?', options: ['हाँ', 'नहीं'], correctAnswerIndex: 0, selectedAnswerIndex: null },
                                 { question: 'क्या आप अगले 365 दिन, बिना किसी बाहरी दबाव के, रोज़ 6-8 घंटे की self-study का routine follow कर सकते हैं?', options: ['हाँ', 'नहीं'], correctAnswerIndex: 0, selectedAnswerIndex: null },
@@ -826,12 +854,12 @@
                                 { question: 'क्या आप अगले 1-2 साल के लिए अपनी social life, hobbies और मनोरंजन को स्वेच्छा से सीमित करने के लिए तैयार हैं?', options: ['हाँ', 'नहीं'], correctAnswerIndex: 0, selectedAnswerIndex: null },
                                 { question: 'जब आप कोई टॉपिक पढ़ते हैं, तो क्या आपके मन में \'क्यों\', \'कैसे\', \'क्या प्रभाव पड़ेगा\' जैसे सवाल स्वाभाविक रूप से उठते हैं?', options: ['हाँ', 'नहीं'], correctAnswerIndex: 0, selectedAnswerIndex: null },
                                 { question: 'क्या आप रोज़ लगातार 7 घंटे पढ़ने की क्षमता रखते हैं (बजाय 2 दिन 14 घंटे और 4 दिन छुट्टी के)?', options: ['हाँ', 'नहीं'], correctAnswerIndex: 0, selectedAnswerIndex: null }
-                            ] 
+                            ]  
                         },
-                        { 
+                        {  
                             type: 'litmus',
-                            name: 'टेस्ट 2: अखबार पढ़ने का लिटमस टेस्ट', 
-                            icon: '📰', 
+                            name: 'टेस्ट 2: अखबार पढ़ने का लिटमस टेस्ट',  
+                            icon: '📰',  
                             description: 'यह परखेगा कि आप एक खबर को एक आम नागरिक की तरह देखते हैं या एक IAS Aspirant की तरह।',
                             summaryMessage: "आत्म-चिंतन महत्वपूर्ण है। आप कैसे सोचते हैं इसका विश्लेषण करना अंक प्राप्त करने से अधिक महत्वपूर्ण है।",
                             article: {
@@ -856,34 +884,34 @@
                             },
                             questions: []
                         },
-                        { 
+                        {  
                             type: 'mcq',
-                            name: 'टेस्ट 3: NCERT फाउंडेशन क्विज', 
-                            icon: '📚', 
+                            name: 'टेस्ट 3: NCERT फाउंडेशन क्विज',  
+                            icon: '📚',  
                             description: 'यह टेस्ट जांचेगा कि आपके NCERT के बेसिक्स कितने मज़बूत हैं।',
-                            summaryMessage: "शानदार! आपकी नींव मजबूत है। अब बस इमारत खड़ी करनी है।", 
-                            questions: [ 
+                            summaryMessage: "शानदार! आपकी नींव मजबूत है। अब बस इमारत खड़ी करनी है।",  
+                            questions: [  
                                 { question: 'अशोक के अधिकांश अभिलेख (Inscriptions) किस लिपि (Script) में लिखे गए थे?', options: ['(A) संस्कृत', '(B) प्राकृत', '(C) ब्राह्मी', '(D) खरोष्ठी'], correctAnswerIndex: 2, selectedAnswerIndex: null },
                                 { question: 'पृथ्वी के क्रस्ट (Crust) के नीचे वह परत कौन सी है जो पिघली हुई चट्टानों (Molten Rocks) से बनी है?', options: ['(A) कोर (Core)', '(B) मेंटल (Mantle)', '(C) बाह्य क्रस्ट (Outer Crust)', '(D) स्थलमंडल (Lithosphere)'], correctAnswerIndex: 1, selectedAnswerIndex: null },
                                 { question: 'भारतीय संविधान का वह कौन सा भाग है, जिसे \'संविधान की आत्मा\' कहा जाता है, लेकिन यह कानूनी रूप से लागू करने योग्य (Enforceable) नहीं है?', options: ['(A) मौलिक अधिकार', '(B) प्रस्तावना (Preamble)', '(C) मौलिक कर्तव्य', '(D) निर्देशक सिद्धांत (DPSP)'], correctAnswerIndex: 1, selectedAnswerIndex: null },
-                            ] 
+                            ]  
                         },
-                        { 
+                        {  
                             type: 'mcq',
-                            name: 'Test 4: PYQs Challenge', 
-                            icon: '🎯', 
+                            name: 'Test 4: PYQs Challenge',  
+                            icon: '🎯',  
                             description: 'यह चैलेंज आपकी एलिमिनेशन की कला को जाँचेगा।',
-                            summaryMessage: "बहुत अच्छे! आप परीक्षा के पैटर्न को समझने लगे हैं।", 
-                            questions: [ 
+                            summaryMessage: "बहुत अच्छे! आप परीक्षा के पैटर्न को समझने लगे हैं।",  
+                            questions: [  
                                 { question: '(UPSC PYQ) \'विधि की सम्यक प्रक्रिया\' (Due Process of Law) का सार क्या है?', options: ['(A) प्राकृतिक न्याय का सिद्धांत', '(B) विधि द्वारा स्थापित प्रक्रिया', '(C) विधि का निष्पक्ष अनुप्रयोग', '(D) विधि के समक्ष समानता'], correctAnswerIndex: 2, selectedAnswerIndex: null },
-                            ] 
+                            ]  
                         },
-                        { 
+                        {  
                             type: 'structure',
-                            name: 'टेस्ट 5: उत्तर लेखन की पहली सीढ़ी', 
-                            icon: '✍️', 
+                            name: 'टेस्ट 5: उत्तर लेखन की पहली सीढ़ी',  
+                            icon: '✍️',  
                             description: 'यह टेस्ट एक टॉप-स्कोरिंग उत्तर की संरचना बनाने की क्षमता को परखेगा।',
-                            summaryMessage: "यह एक महत्वपूर्ण कौशल है। इसमें महारत हासिल करने के लिए अभ्यास करते रहें।", 
+                            summaryMessage: "यह एक महत्वपूर्ण कौशल है। इसमें महारत हासिल करने के लिए अभ्यास करते रहें।",  
                             question: {
                                 title: 'प्रश्न (GS-2, 150 शब्द):',
                                 text: '"डिजिटल इंडिया कार्यक्रम" के तहत उठाए गए कदमों ने नागरिकों के सशक्तिकरण में कैसे मदद की है? चर्चा कीजिए।'
@@ -942,20 +970,20 @@
 
                 get activeSections() { return this.sections[this.language]; },
                 
-                get totalQuestions() { 
+                get totalQuestions() {  
                     return this.activeSections.reduce((total, section) => {
                         if (section.type === 'mindset' || section.type === 'mcq') {
                             return total + section.questions.length;
                         }
                         return total;
-                    }, 0); 
+                    }, 0);  
                 },
 
                 get progressPercentage() {
                     let questionsAnswered = 0;
                     let totalQuizQuestions = this.totalQuestions;
                     if (totalQuizQuestions === 0) return 0;
-                    for(let i = 0; i < this.currentSectionIndex; i++) { 
+                    for(let i = 0; i < this.currentSectionIndex; i++) {  
                         if (this.activeSections[i].type === 'mcq' || this.activeSections[i].type === 'mindset') {
                             questionsAnswered += this.activeSections[i].questions.length;
                         }
@@ -975,22 +1003,22 @@
                 next() {
                     const sectionType = this.currentSection().type;
                     if (sectionType === 'mcq' || sectionType === 'mindset') {
-                        if (this.currentQuestion().selectedAnswerIndex === null) { 
-                            alert(this.language === 'hi' ? 'कृपया एक उत्तर चुनें।' : 'Please select an answer.'); 
-                            return; 
+                        if (this.currentQuestion().selectedAnswerIndex === null) {  
+                            alert(this.language === 'hi' ? 'कृपया एक उत्तर चुनें।' : 'Please select an answer.');  
+                            return;  
                         }
                         if (this.isLastQuestionOfSection()) {
                             this.sectionScores.push(this.calculateSectionScore());
                             this.currentView = 'summary';
                         } else { this.currentQuestionIndex++; }
                     } else {
-                        this.sectionScores.push(null); 
+                        this.sectionScores.push(null);  
                             this.currentView = 'summary';
                     }
                 },
                 
                 nextSection() {
-                    if (this.isLastSection()) { this.currentView = 'report'; } 
+                    if (this.isLastSection()) { this.currentView = 'report'; }  
                     else {
                         this.currentSectionIndex++;
                         this.currentQuestionIndex = 0;
@@ -998,7 +1026,7 @@
                     }
                 },
 
-                calculateSectionScore() { 
+                calculateSectionScore() {  
                     const section = this.currentSection();
                     if (section.type === 'mindset') { return section.questions.filter(q => q.selectedAnswerIndex === 0).length; }
                     if (section.type === 'mcq') { return section.questions.filter(q => q.selectedAnswerIndex === q.correctAnswerIndex).length; }
@@ -1021,44 +1049,44 @@
                 
                 getDetailedFeedback() {
                     return this.activeSections.map((section, index) => {
-                         const score = this.sectionScores[index];
-                         const total = section.questions.length;
-                         let analysis, nextStep;
-                         if (this.language === 'hi') {
-                             if (section.type === 'mindset') {
-                                 if (score >= 7) analysis = 'बहुत बढ़िया! आपका Mindset एक ऑफिसर जैसा है।';
-                                 else if (score >= 4) analysis = 'यह बिल्कुल सामान्य है! यह वो area है जहाँ आपको काम करना है।';
-                                 else analysis = 'आपकी ईमानदारी के लिए बधाई! यह आत्म-चिंतन का एक शानदार अवसर है।';
-                                 nextStep = 'इन सवालों पर विचार करें और अपनी mental strength बनाने पर ध्यान दें।';
-                             } else if (section.type === 'mcq') {
-                                analysis = (score / total >= 0.7) ? 'आपकी समझ इस क्षेत्र में अच्छी है।' : 'इस क्षेत्र में आपको और ध्यान देने की आवश्यकता है।';
-                                nextStep = (score / total >= 0.7) ? 'इस गति को बनाए रखें और उन्नत विषयों का अभ्यास करें।' : 'बुनियादी अवधारणाओं को फिर से पढ़ें और अभ्यास करें।';
-                             } else {
-                                analysis = "यह एक आत्म-चिंतन अभ्यास था। उद्देश्य अपनी सोच प्रक्रिया को समझना था।";
-                                nextStep = "इस अभ्यास से मिली सीख को अपनी तैयारी की रणनीति में शामिल करें।";
-                             }
-                         } else {
-                             if (section.type === 'mindset') {
-                                 if (score >= 7) analysis = 'Excellent! Your mindset is like that of an officer.';
-                                 else if (score >= 4) analysis = 'This is quite normal! This is an area you need to work on.';
-                                 else analysis = 'Congratulations on your honesty! This is a great opportunity for self-reflection.';
-                                 nextStep = 'Reflect on these questions and focus on building your mental strength.';
-                             } else if (section.type === 'mcq') {
-                                analysis = (score / total >= 0.7) ? 'Your understanding in this area is good.' : 'You need to pay more attention to this area.';
-                                nextStep = (score / total >= 0.7) ? 'Maintain this pace and practice advanced topics.' : 'Re-read the basic concepts and practice more.';
-                             } else {
-                                analysis = "This was a self-reflection exercise. The goal was to understand your thought process.";
-                                nextStep = "Incorporate the learnings from this exercise into your preparation strategy.";
-                             }
-                         }
-                         return { title: section.name, analysis: analysis, nextStep: nextStep, score: score, total: total, type: section.type };
+                          const score = this.sectionScores[index];
+                          const total = section.questions.length;
+                          let analysis, nextStep;
+                          if (this.language === 'hi') {
+                              if (section.type === 'mindset') {
+                                  if (score >= 7) analysis = 'बहुत बढ़िया! आपका Mindset एक ऑफिसर जैसा है।';
+                                  else if (score >= 4) analysis = 'यह बिल्कुल सामान्य है! यह वो area है जहाँ आपको काम करना है।';
+                                  else analysis = 'आपकी ईमानदारी के लिए बधाई! यह आत्म-चिंतन का एक शानदार अवसर है।';
+                                  nextStep = 'इन सवालों पर विचार करें और अपनी mental strength बनाने पर ध्यान दें।';
+                              } else if (section.type === 'mcq') {
+                                 analysis = (score / total >= 0.7) ? 'आपकी समझ इस क्षेत्र में अच्छी है।' : 'इस क्षेत्र में आपको और ध्यान देने की आवश्यकता है।';
+                                 nextStep = (score / total >= 0.7) ? 'इस गति को बनाए रखें और उन्नत विषयों का अभ्यास करें।' : 'बुनियादी अवधारणाओं को फिर से पढ़ें और अभ्यास करें।';
+                              } else {
+                                 analysis = "यह एक आत्म-चिंतन अभ्यास था। उद्देश्य अपनी सोच प्रक्रिया को समझना था।";
+                                 nextStep = "इस अभ्यास से मिली सीख को अपनी तैयारी की रणनीति में शामिल करें।";
+                              }
+                          } else {
+                              if (section.type === 'mindset') {
+                                  if (score >= 7) analysis = 'Excellent! Your mindset is like that of an officer.';
+                                  else if (score >= 4) analysis = 'This is quite normal! This is an area you need to work on.';
+                                  else analysis = 'Congratulations on your honesty! This is a great opportunity for self-reflection.';
+                                  nextStep = 'Reflect on these questions and focus on building your mental strength.';
+                              } else if (section.type === 'mcq') {
+                                 analysis = (score / total >= 0.7) ? 'Your understanding in this area is good.' : 'You need to pay more attention to this area.';
+                                 nextStep = (score / total >= 0.7) ? 'Maintain this pace and practice advanced topics.' : 'Re-read the basic concepts and practice more.';
+                              } else {
+                                 analysis = "This was a self-reflection exercise. The goal was to understand your thought process.";
+                                 nextStep = "Incorporate the learnings from this exercise into your preparation strategy.";
+                              }
+                          }
+                          return { title: section.name, analysis: analysis, nextStep: nextStep, score: score, total: total, type: section.type };
                     });
                 }
             }
         }
         
         function prelimsPulse() {
-            const today = new Date().toISOString().slice(0, 10); 
+            const today = new Date().toISOString().slice(0, 10);  
             
             // Mock Data agar Google Sheet se error aaye
             const MOCK_QUESTION = {
@@ -1070,8 +1098,8 @@
             };
 
             return {
-                allQuestions: {}, 
-                isLoading: true, 
+                allQuestions: {},  
+                isLoading: true,  
                 language: 'en',
                 flipped: false,
                 selectedAnswerIndex: null,
@@ -1100,7 +1128,7 @@
                 // FIX: Data Fetching aur Parsing Logic
                 async fetchQuestions() {
                     this.isLoading = true;
-                    const SHEET_URL = PRELIMS_SHEET_URL; 
+                    const SHEET_URL = PRELIMS_SHEET_URL;  
                     
                     try {
                         const response = await fetch(SHEET_URL);
@@ -1140,8 +1168,8 @@
                     }
                 },
 
-                toggleLanguage() { 
-                    this.language = this.language === 'en' ? 'hi' : 'en'; 
+                toggleLanguage() {  
+                    this.language = this.language === 'en' ? 'hi' : 'en';  
                     this.flipped = false;
                     this.selectedAnswerIndex = null;
                 },
@@ -1159,4 +1187,3 @@
     </script>
 </body>
 </html>
-

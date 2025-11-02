@@ -77,7 +77,9 @@
             .diagnostic-option-text { font-size: 0.9rem; line-height: 1.4rem; padding: 0.75rem !important; }
         }
 
-        /* PRELIMS PULSE FIXES */
+        /* === START: PRELIMS PULSE FIX (v4 - FINAL) === */
+        
+        /* हम ओरिजिनल flipper CSS को वापस ला रहे हैं */
         .flipper { perspective: 1000px; }
         .flipper-inner {  
             position: relative;  
@@ -86,6 +88,7 @@
             height: 100%;  
         }
         .flipper.is-flipped .flipper-inner { transform: rotateY(180deg); }
+        
         .front, .back {  
             position: absolute;  
             width: 100%;  
@@ -94,6 +97,32 @@
             backface-visibility: hidden;  
         }
         .back { transform: rotateY(180deg); }
+
+        /* * यह नया फिक्स है:
+         * हम कार्ड को नहीं, बल्कि कार्ड के *अंदर* वाले कंटेंट div को स्क्रॉल-योग्य बनाएँगे।
+        */
+        .prelims-inner-content {
+            /* यह कंटेंट एरिया को एक अधिकतम ऊँचाई देता है */
+            max-height: 70vh; /* स्क्रीन की ऊँचाई का 70% */
+            
+            /* यदि कंटेंट लंबा होता है, तो स्क्रॉलबार दिखाता है */
+            overflow-y: auto;
+        }
+        
+        /* स्क्रॉलबार की स्टाइलिंग */
+        .prelims-inner-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .prelims-inner-content::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+            border-radius: 4px;
+        }
+        .prelims-inner-content::-webkit-scrollbar-thumb {
+            background-color: var(--border-color);
+            border-radius: 4px;
+            border: 2px solid var(--bg-primary);
+        }
+        /* === END: PRELIMS PULSE FIX === */
         
         @keyframes breathing-glow-animation {
             0% { box-shadow: 0 0 15px 0px var(--glow-color); }
@@ -101,59 +130,6 @@
             100% { box-shadow: 0 0 15px 0px var(--glow-color); }
         }
         .breathing-glow { animation: breathing-glow-animation 4s ease-in-out infinite; }
-
-        /* ================================================= */
-        /* == START: Prelims Pulse Overflow Fix (SIMPLE)  == */
-        /* ================================================= */
-        
-        /* Ye Question, Options, aur Explanation sab par scroll lagayega */
-        .prelims-scroll-question,
-        .prelims-scroll-options,
-        .prelims-scroll-explanation {
-            overflow-y: auto; /* Scrollbar */
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-            word-break: break-word;
-            padding-right: 0.75rem; /* Scrollbar ke liye jagah */
-        }
-
-        .prelims-scroll-question {
-            max-height: 20vh; /* Question ke liye max height */
-        }
-        
-        .prelims-scroll-options {
-            max-height: 35vh; /* Options ke liye max height */
-        }
-
-        .prelims-scroll-explanation {
-            max-height: 50vh; /* Explanation ke liye max height */
-        }
-        
-        /* Scrollbar Styling */
-        .prelims-scroll-question::-webkit-scrollbar,
-        .prelims-scroll-options::-webkit-scrollbar,
-        .prelims-scroll-explanation::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        .prelims-scroll-question::-webkit-scrollbar-track,
-        .prelims-scroll-options::-webkit-scrollbar-track,
-        .prelims-scroll-explanation::-webkit-scrollbar-track {
-            background: var(--bg-primary);
-            border-radius: 4px;
-        }
-        
-        .prelims-scroll-question::-webkit-scrollbar-thumb,
-        .prelims-scroll-options::-webkit-scrollbar-thumb,
-        .prelims-scroll-explanation::-webkit-scrollbar-thumb {
-            background-color: var(--border-color);
-            border-radius: 4px;
-            border: 2px solid var(--bg-primary);
-        }
-
-        /* =============================================== */
-        /* == END: Prelims Pulse Overflow Fix (SIMPLE)  == */
-        /* =============================================== */
 
         /* ================================================= */
         /* == START: Diagnostic Question Overflow Fix     == */
@@ -285,6 +261,7 @@
 
                         <div class="flipper mx-auto max-w-4xl" :class="{'is-flipped': flipped}" style="min-height: 400px;">
                             <div class="flipper-inner">
+                                
                                 <div class="front w-full">
                                     <div class="w-full text-left p-4 md:p-6">
                                         <template x-if="isLoading">
@@ -302,16 +279,14 @@
                                         
                                         <template x-if="!isLoading && questionData">
                                             <div>
-                                                <p class="text-lg font-semibold mb-6 whitespace-pre-line prelims-scroll-question" x-text="questionData.question[language]"></p>
-                                                
-                                                <div class="space-y-3 prelims-scroll-options">
+                                                <p class="text-lg font-semibold mb-6 whitespace-pre-line" x-text="questionData.question[language]"></p>
+                                                <div class="space-y-3">
                                                     <template x-for="(option, index) in questionData.options[language]" :key="index">
                                                         <button @click="selectedAnswerIndex = index" class="w-full text-left p-4 border rounded-lg transition-colors duration-300 border-custom hover:bg-indigo-500/10" :class="{'border-indigo-500 ring-2 ring-indigo-500': index === selectedAnswerIndex}">
                                                             <span x-text="option"></span>
                                                         </button>
                                                     </template>
                                                 </div>
-                                                
                                                 <div class="text-center mt-8">
                                                     <button @click="lockAnswer()" :disabled="selectedAnswerIndex === null" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed">Lock Answer</button>
                                                 </div>
@@ -319,12 +294,14 @@
                                         </template>
                                     </div>
                                 </div>
+                                
                                 <div class="back w-full">
                                     <div class="w-full h-full p-8 rounded-3xl text-left flex flex-col justify-center" :class="isCorrect ? 'bg-green-500/10 border border-green-700' : 'bg-red-500/10 border border-red-700'">
+                                        
                                         <h3 class="text-2xl font-bold mb-4" :class="isCorrect ? 'text-green-600' : 'text-red-600'" x-text="isCorrect ? feedbackMessage.correct[language] : feedbackMessage.incorrect[language]"></h3>
                                         <p class="font-semibold text-lg mb-2">Explanation:</p>
                                         
-                                        <p class="prelims-scroll-explanation" :class="isCorrect ? 'text-green-700' : 'text-red-700'" x-text="questionData.explanation[language]"></p>
+                                        <p class="whitespace-pre-line" :class="isCorrect ? 'text-green-700' : 'text-red-700'" x-text="questionData.explanation[language]"></p>
                                     </div>
                                 </div>
                             </div>

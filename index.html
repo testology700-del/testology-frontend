@@ -296,8 +296,7 @@
                                 </div>
                                 
                                 <div class="back w-full">
-                                    <div class="w-full h-full p-8 rounded-3xl text-left flex flex-col justify-center" :class="isCorrect ? 'bg-green-500/10 border border-green-700' : 'bg-red-500/10 border border-red-700'">
-                                        
+                                    <div class="w-full p-8 rounded-3xl text-left" :class="isCorrect ? 'bg-green-500/10 border border-green-700' : 'bg-red-500/10 border border-red-700'">                                        
                                         <h3 class="text-2xl font-bold mb-4" :class="isCorrect ? 'text-green-600' : 'text-red-600'" x-text="isCorrect ? feedbackMessage.correct[language] : feedbackMessage.incorrect[language]"></h3>
                                         <p class="font-semibold text-lg mb-2">Explanation:</p>
                                         
@@ -1225,3 +1224,4 @@
     </script>
 </body>
 </html>
+

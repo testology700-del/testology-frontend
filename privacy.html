@@ -17,14 +17,6 @@
             width: 100%;  
             overflow-x: hidden !important;  
         }
-main {
-    padding-top: 100px !important; 
-}
-@media (max-width: 768px) {
-    main {
-        padding-top: 120px !important; 
-    }
-}
         body { font-family: 'Poppins', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
         
         .theme-light { --bg-primary: #fdfaf6; --bg-secondary: #ffffff; --text-primary: #3d352e; --text-secondary: #475569; --border-color: #e7e0d8; --shadow-color: rgba(99, 102, 241, 0.15); --bg-animated: linear-gradient(135deg, #f5f7fa, #c3cfe2, #e2ebf0); --gradient-border: linear-gradient(145deg, #ec4899, #8b5cf6); --gradient-text: var(--gradient-border); --glow-color: rgba(99, 102, 241, 0.6); }
@@ -215,19 +207,17 @@ main {
                 </div>
             </div>
             <div class="hidden md:flex items-center space-x-4">
-                <a href="#home" class="font-medium text-secondary hover:text-indigo-500 px-3 py-2">Home</a>
+                <a href="index.html" class="font-medium text-secondary hover:text-indigo-500 px-3 py-2">Home</a>
                 <a href="#prelims-pulse" class="font-medium text-secondary hover:text-indigo-500 px-3 py-2">Prelims Pulse</a>
                 <a href="#mcq-zones" class="font-medium text-secondary hover:text-indigo-500 px-3 py-2">MCQ Zones</a>
                 <a href="#clarity-hub" class="font-medium text-secondary hover:text-indigo-500 px-3 py-2">Clarity Hub</a>
                 <a href="#youtube" class="font-medium text-secondary hover:text-indigo-500 px-3 py-2">Videos</a>
-                <a href="about.html" class="font-medium text-secondary hover:text-indigo-500 px-3 py-2">About Us</a>
-                <a href="contact.html" class="font-medium text-secondary hover:text-indigo-500 px-3 py-2">Contact Us</a>
                 <button @click="toggleTheme()" class="p-2 rounded-full hover:bg-primary/50"><span x-text="themeIcons[currentThemeIndex]"></span></button>
             </div>
             <div x-data="{ open: false }" class="md:hidden">
                 <button @click="open = !open" class="text-primary focus:outline-none"><svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
                 <div x-show="open" @click.away="open = false" x-transition class="absolute top-16 right-4 mt-2 w-48 bg-secondary rounded-lg shadow-lg z-20">
-                    <a href="#home" @click="open = false" class="block px-4 py-2 text-secondary hover:bg-primary">Home</a>
+                    <a href="index.html" @click="open = false" class="block px-4 py-2 text-secondary hover:bg-primary">Home</a>
                     <a href="#prelims-pulse" @click="open = false" class="block px-4 py-2 text-secondary hover:bg-primary">Prelims Pulse</a>
                     <a href="#mcq-zones" @click="open = false" class="block px-4 py-2 text-secondary hover:bg-primary">MCQ Zones</a>
                     <a href="#clarity-hub" @click="open = false" class="block px-4 py-2 text-secondary hover:bg-primary">Clarity Hub</a>
@@ -239,247 +229,28 @@ main {
         </nav>
     </header>
 
-    <main class="relative pt-20 pb-24 space-y-28 md:space-y-40">
-        <div class="content-card mt-8 md:mt-16"> <section id="home" class="container mx-auto px-6">
-                <div class="gradient-border-container breathing-glow">
-                    <div class="p-8 md:p-12 bg-secondary rounded-3xl text-center relative z-10">
-                        <h2 class="text-4xl md:text-6xl font-bold mb-2">Unlock Your Potential</h2>
-                        <h3 class="text-lg md:text-xl text-indigo-400 mb-4 italic">A Self-Evaluation: UPSC or your State PSC?</h3>
-                        <p class="text-secondary max-w-2xl mx-auto mb-8">"दुनिया को दिखाने के लिए नहीं खुद के लिए पढ़ें, आपको आपसे अच्छा कोई नहीं जान सकता तो खुद को धोखे में क्यों रखना?"</p>
-                        <button @click="showDiagnostic = true" class="inline-flex items-center justify-center bg-indigo-600 text-white font-bold py-4 px-10 rounded-lg transition text-lg animate-pulse-custom hover:bg-indigo-700">Start Self-Evaluation <span class="ml-3 text-2xl">→</span></button>
-                    </div>
-                </div>
-            </section>
-        </div>
+<main class="relative pt-20 pb-24 space-y-28 md:space-y-40">
+    <div class="content-card mt-8 md:mt-16 is-visible"> 
+        <section id="privacy-policy" class="container mx-auto px-6 max-w-4xl">
+            <div class="p-8 md:p-12 bg-secondary rounded-3xl relative z-10 border border-custom">
+                <h2 class="text-4xl md:text-5xl font-bold mb-8 gradient-text text-center">Privacy Policy (गोपनीयता नीति)</h2>
+                
+                <h3 class="text-2xl font-semibold mb-3">1. हम क्या इकट्ठा करते हैं?</h3>
+                <p class="text-secondary mb-4">हम केवल आपका ईमेल पता (यदि आप साइन अप करते हैं) और आपके **टेस्ट स्कोर** (आपके सेल्फ-एवैल्युएशन के लिए) को इकट्ठा करते हैं। कोई भी संवेदनशील व्यक्तिगत जानकारी (जैसे बैंक विवरण या घर का पता) नहीं माँगी जाती है।</p>
+                
+                <h3 class="text-2xl font-semibold mb-3 mt-6">2. उपयोग और सुरक्षा</h3>
+                <p class="text-secondary mb-4">हम आपके स्कोर का उपयोग केवल आपको **पर्सनलाइज़्ड फ़ीडबैक** और सही मार्गदर्शन देने के लिए करते हैं। हम आपकी जानकारी को सुरक्षित और एन्क्रिप्टेड (Encrypted) सर्वर पर स्टोर करते हैं।</p>
+                
+                <h3 class="text-2xl font-semibold mb-3 mt-6">3. साझाकरण (Sharing)</h3>
+                <p class="text-secondary mb-4">हम आपकी व्यक्तिगत जानकारी या टेस्ट स्कोर को **किसी भी तीसरे पक्ष (Third Party)** के साथ कभी साझा नहीं करते हैं। आपका डेटा केवल आपकी प्रगति को ट्रैक करने के लिए उपयोग किया जाता है।</p>
+                
+                <h3 class="text-2xl font-semibold mb-3 mt-6">4. कुकीज़ (Cookies)</h3>
+                <p class="text-secondary">हम वेबसाइट के प्रदर्शन को बेहतर बनाने और थीम (जैसे Eye Care Mode) की सेटिंग्स को याद रखने के लिए छोटी कुकीज़ का उपयोग करते हैं।</p>
 
-        <div class="content-card">
-            <section id="prelims-pulse" class="container mx-auto px-6" x-data="prelimsPulse()">
-                <div class="gradient-border-container">
-                    <div class="p-8 md:p-12 bg-secondary rounded-3xl text-center relative z-10">
-                        <h2 class="text-3xl font-bold mb-2">Prelims Pulse</h2>
-                        <h3 class="text-lg text-secondary mb-6 italic">"ज्ञान की दैनिक अग्निपरीक्षा। हर दिन एक उच्च-स्तरीय प्रश्न के साथ अपने दिमाग को तेज करें और अनुशासन का निर्माण करें।"</h3>
-
-                        <div class="flex justify-center items-center mb-4 md:mb-0 md:absolute md:top-6 md:right-6">
-                            <div class="flex items-center space-x-2 text-sm">
-                                <span class="text-secondary font-medium">English</span>
-                                <div @click="toggleLanguage()" class="w-12 h-6 flex items-center bg-gray-600 rounded-full p-1 cursor-pointer transition-colors" :class="{'bg-indigo-600': language === 'hi'}">
-                                    <div class="w-5 h-5 bg-white rounded-full shadow-md transform transition-transform" :class="{'translate-x-6': language === 'hi'}"></div>
-                                </div>
-                                <span class="text-secondary font-medium">हिंदी</span>
-                            </div>
-                        </div>
-
-                        <div class="flipper mx-auto max-w-4xl" :class="{'is-flipped': flipped}" style="min-height: 400px;">
-                            <div class="flipper-inner">
-                                
-                                <div class="front w-full">
-                                    <div class="w-full text-left p-4 md:p-6">
-                                        <template x-if="isLoading">
-                                            <div class="text-center py-16 text-indigo-400 font-bold text-xl animate-pulse">
-                                                <p>Fetching today's question from Google Sheets...</p>
-                                                <p>कृपया प्रतीक्षा करें...</p>
-                                            </div>
-                                        </template>
-                                        <template x-if="!isLoading && !questionData">
-                                            <div class="text-center py-16 text-red-400 font-bold text-xl">
-                                                <p>Error: Could not load question data for today.</p>
-                                                <p>त्रुटि: आज का प्रश्न लोड नहीं हो पाया। Google Sheet data check karein.</p>
-                                            </div>
-                                        </template>
-                                        
-                                        <template x-if="!isLoading && questionData">
-                                            <div>
-                                                <p class="text-lg font-semibold mb-6 whitespace-pre-line" x-text="questionData.question[language]"></p>
-                                                <div class="space-y-3">
-                                                    <template x-for="(option, index) in questionData.options[language]" :key="index">
-                                                        <button @click="selectedAnswerIndex = index" class="w-full text-left p-4 border rounded-lg transition-colors duration-300 border-custom hover:bg-indigo-500/10" :class="{'border-indigo-500 ring-2 ring-indigo-500': index === selectedAnswerIndex}">
-                                                            <span x-text="option"></span>
-                                                        </button>
-                                                    </template>
-                                                </div>
-                                                <div class="text-center mt-8">
-                                                    <button @click="lockAnswer()" :disabled="selectedAnswerIndex === null" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed">Lock Answer</button>
-                                                </div>
-                                            </div>
-                                        </template>
-                                    </div>
-                                </div>
-                                
-                                <div class="back w-full">
-                                    <div class="w-full p-8 rounded-3xl text-left" :class="isCorrect ? 'bg-green-500/10 border border-green-700' : 'bg-red-500/10 border border-red-700'">                                        
-                                        <h3 class="text-2xl font-bold mb-4" :class="isCorrect ? 'text-green-600' : 'text-red-600'" x-text="isCorrect ? feedbackMessage.correct[language] : feedbackMessage.incorrect[language]"></h3>
-                                        <p class="font-semibold text-lg mb-2">Explanation:</p>
-                                        
-                                        <p class="whitespace-pre-line" :class="isCorrect ? 'text-green-700' : 'text-red-700'" x-text="questionData.explanation[language]"></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <div class="content-card">
-            <section id="mcq-zones" class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold mb-2">MCQ Zones</h2>
-                    <h3 class="text-2xl font-semibold mb-4 italic gradient-text">दो टेस्ट रोज़, सक्सेस के रहो क्लोज।</h3>
-                    <p class="text-secondary max-w-3xl mx-auto">"सफलता की इमारत मजबूत नींव पर खड़ी होती है। यहाँ विषय-वार अभ्यास करके अपने ज्ञान की हर ईंट को मजबूत करें।"</p>
-                </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 text-left">
-                    <div class="gradient-border-container">
-                        <div class="p-6 bg-secondary rounded-3xl h-full flex flex-col">
-                            <h4 class="text-2xl font-bold mb-4">Static Zone (PYQ & New MCQ)</h4>
-                            <div class="space-y-3 flex-grow">
-                                <div class="text-center my-2 border-t border-b border-custom py-3">
-                                    <p class="text-secondary text-sm mb-2">शुरुआत करने के लिए सबसे अच्छी जगह:</p>
-                                    <button @click="showComingSoonModal('NCERT Test')" class="w-full bg-indigo-500/20 text-indigo-300 font-bold py-3 px-6 rounded-lg hover:bg-indigo-500/30 transition text-sm">🚀 NCERT फाउंडेशन टेस्ट शुरू करें</button>
-                                </div>
-                                <p class="text-center text-secondary text-sm">या, अपना कस्टम टेस्ट बनाएं:</p>
-                                
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    <div>
-                                        <label class="text-xs font-medium text-secondary">Language</label>
-                                        <select class="w-full p-2 rounded-lg form-select mt-1 text-sm">
-                                            <option>English</option>
-                                            <option>हिन्दी</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="text-xs font-medium text-secondary">Exam</label>
-                                        <select class="w-full p-2 rounded-lg form-select mt-1 text-sm">
-                                            <option>UPSC</option>
-                                            <option>UPPSC</option>
-                                            <option>MPPSC</option>
-                                            <option>BPSC</option>
-                                            <option>RPSC</option>
-                                            <option>UKPSC</option>
-                                            <option>HPSC</option>
-                                            <option>Others</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    <div>
-                                        <label class="text-xs font-medium text-secondary">Subject</label>
-                                        <select class="w-full p-2 rounded-lg form-select mt-1 text-sm">
-                                            <option>History</option>
-                                            <option>Polity</option>
-                                            <option>Geography</option>
-                                            <option>Economy</option>
-                                            <option>Science & Tech</option>
-                                            <option>Environment</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="text-xs font-medium text-secondary">Topic</label>
-                                        <input type="text" placeholder="e.g., Indus Valley Civilization" class="w-full p-2 rounded-lg form-input mt-1 text-sm">
-                                    </div>
-                                </div>
-
-                                <div class="grid grid-cols-2 gap-3">
-                                    <div>
-                                        <label class="text-xs font-medium text-secondary">Type</label>
-                                        <select class="w-full p-2 rounded-lg form-select mt-1 text-sm">
-                                            <option>New MCQ</option>
-                                            <option>PYQ</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="text-xs font-medium text-secondary">Questions</label>
-                                        <select class="w-full p-2 rounded-lg form-select mt-1 text-sm">
-                                            <option>5</option>
-                                            <option>10</option>
-                                            <option>15</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <button @click="showComingSoonModal('MCQ Zone')" class="w-full bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 transition mt-4">Get Questions</button>
-                        </div>
-                    </div>
-                    <div class="gradient-border-container">
-                        <div class="p-6 bg-secondary rounded-3xl h-full flex flex-col">
-                            <h4 class="text-2xl font-bold mb-4">Current Affairs Zone</h4>
-                            <div class="space-y-3 flex-grow">
-                                <div class="grid grid-cols-2 gap-3">
-                                    <div>
-                                        <label class="text-xs font-medium text-secondary">Language</label>
-                                        <select class="w-full p-2 rounded-lg form-select mt-1 text-sm">
-                                            <option>English</option>
-                                            <option>हिन्दी</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="text-xs font-medium text-secondary">Questions</label>
-                                        <select class="w-full p-2 rounded-lg form-select mt-1 text-sm">
-                                            <option>5</option>
-                                            <option>10</option>
-                                            <option>15</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="text-xs font-medium text-secondary">Subject</label>
-                                    <input type="text" placeholder="e.g., Polity & Governance" class="w-full p-2 rounded-lg form-input mt-1 text-sm">
-                                </div>
-                                <div>
-                                    <label class="text-xs font-medium text-secondary">Month</label>
-                                    <input type="text" placeholder="e.g., January 2025" class="w-full p-2 rounded-lg form-input mt-1 text-sm">
-                                </div>
-                                <div>
-                                    <label class="text-xs font-medium text-secondary">Topic</label>
-                                    <input type="text" placeholder="e.g., G20 Summit" class="w-full p-2 rounded-lg form-input mt-1 text-sm">
-                                </div>
-                            </div>
-                            <button @click="showComingSoonModal('MCQ Zone')" class="w-full bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 transition mt-4">Get Questions</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <div class="content-card">
-            <section id="clarity-hub" class="container mx-auto px-6">
-                <div class="gradient-border-container">
-                    <div class="p-8 md:p-12 bg-secondary rounded-3xl w-full text-center relative z-10">
-                        <h2 class="text-4xl font-bold mb-2">Concept Clarity Hub</h2>
-                        <p class="text-lg text-secondary mb-8">"एक भी संदेह आपकी सफलता में बाधा न बने। यहाँ अपने हर 'क्यों' का जवाब पाएं और अपनी अवधारणाओं को क्रिस्टल-क्लियर करें।"</p>
-                        <div class="max-w-2xl mx-auto">
-                            <textarea placeholder="Type your doubt here..." rows="5" class="w-full p-3 rounded-lg form-input"></textarea>
-                            <div class="text-center mt-6">
-                                <button @click="showComingSoonModal('Doubt Hub')" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 transition">Submit Doubt</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <div class="content-card">
-            <section id="youtube" class="container mx-auto px-6">
-                <div class="gradient-border-container">
-                    <div class="p-8 md:p-12 bg-secondary rounded-3xl w-full text-center relative z-10">
-                        <h2 class="text-4xl font-bold mb-2">From Our Channel</h2>
-                        <p class="text-lg text-secondary mb-8">"सिर्फ 'क्या' पढ़ना है यह नहीं, बल्कि 'कैसे' पढ़ना है यह भी सीखें। हमारे वीडियो के माध्यम से रणनीतिक मार्गदर्शन प्राप्त करें।"</p>
-                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                             <div class="bg-secondary rounded-2xl shadow-custom border border-custom overflow-hidden">
-                                 <div class="aspect-w-16 aspect-h-9"><iframe class="w-full h-full" src="https://www.youtube.com/embed/YourVideoID1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-                                 <div class="p-6"><h3 class="text-xl font-semibold mb-2">Video Title 1</h3><p class="text-secondary">Relevant notes for this video.</p></div>
-                             </div>
-                             <div class="bg-secondary rounded-2xl shadow-custom border border-custom overflow-hidden">
-                                  <div class="aspect-w-16 aspect-h-9"><iframe class="w-full h-full" src="https://www.youtube.com/embed/YourVideoID2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-                                  <div class="p-6"><h3 class="text-xl font-semibold mb-2">Video Title 2</h3><p class="text-secondary">Relevant notes for this video.</p></div>
-                             </div>
-                         </div>
-                       <p class="mt-8 text-lg font-semibold text-indigo-400">Follow us for more: <a href="https://www.youtube.com/@testologyGSQ" target="_blank" class="hover:underline">@testologyGSQ</a></p>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-    
+            </div>
+        </section>
+    </div>
+</main>    
     <div x-show="showDiagnostic" class="fixed inset-0 z-[100] flex items-center justify-center p-4" x-cloak>
         <div @click.away="$dispatch('close-diagnostic')" x-show="showDiagnostic" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="bg-secondary rounded-3xl shadow-custom-lg w-full max-w-5xl max-h-[95vh] md:max-h-[90vh] overflow-y-auto" x-data="diagnosticTest()">
             <div class="p-6 md:p-12 relative">
@@ -683,12 +454,7 @@ main {
     </button>
     
     <footer class="bg-secondary border-t border-custom relative z-10">
-        <div class="container mx-auto px-6 py-8 text-center text-secondary"><div class="mb-4 space-x-4">
-    <a href="about.html" class="hover:text-primary">About Us</a>
-    <a href="privacy.html" class="hover:text-primary">Privacy Policy</a>
-    <a href="terms.html" class="hover:text-primary">Terms of Use</a>
-    <a href="contact.html" class="hover:text-primary">Contact Us</a>
-</div>
+        <div class="container mx-auto px-6 py-8 text-center text-secondary">
               <p>&copy; 2025 Testology. All Rights Reserved.</p>
         </div>
     </footer>

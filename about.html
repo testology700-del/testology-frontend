@@ -3,243 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testology - Unlock Your Potential</title>
+    <title>About Us | Testology - The Arena</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <style>
         /* FINAL FIX: Aggressive Overflow Management */
-        html, body {
-            width: 100%;  
-            overflow-x: hidden !important;  
-        }
-/* आपके मौजूदा <style> टैग्स में यह कोड जोड़ें */
-
-/* FIX: Header Overlap - सभी पेजों में हेडिंग को नीचे धकेलने के लिए */
-main {
-    padding-top: 100px !important; /* Default padding for larger screens */
-}
-@media (max-width: 768px) {
-    main {
-        padding-top: 120px !important; /* Extra padding for mobile/smaller screens */
-    }
-}
-
-/* FIX: HEADING CUT - यह हेडिंग्स के कटने की समस्या को हल करता है */
-h2 {
-    /* हेडिंग्स को थोड़ा नीचे धकेलेगा ताकि मात्राएं कटें नहीं */
-    margin-top: 10px !important; 
-    line-height: 1.2; /* लाइन की ऊंचाई थोड़ी कम करें */
-}
-        body { font-family: 'Poppins', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
+        html, body { width: 100%; overflow-x: hidden !important; }
         
+        /* FIX: Header Overlap */
+        main { padding-top: 100px !important; }
+        @media (max-width: 768px) { main { padding-top: 120px !important; } }
+
+        /* 🚀 FIX: HINDI HEADING CLIPPING */
+        .hindi-fix {
+            line-height: 1.6 !important; 
+            padding-top: 10px;          
+            padding-bottom: 10px;       
+            display: inline-block;      
+        }
+
+        body { font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
+        
+        /* Theme Variables */
         .theme-light { --bg-primary: #fdfaf6; --bg-secondary: #ffffff; --text-primary: #3d352e; --text-secondary: #475569; --border-color: #e7e0d8; --shadow-color: rgba(99, 102, 241, 0.15); --bg-animated: linear-gradient(135deg, #f5f7fa, #c3cfe2, #e2ebf0); --gradient-border: linear-gradient(145deg, #ec4899, #8b5cf6); --gradient-text: var(--gradient-border); --glow-color: rgba(99, 102, 241, 0.6); }
         .theme-dark { --bg-primary: #0b1120; --bg-secondary: #1a233b; --text-primary: #e2e8f0; --text-secondary: #94a3b8; --border-color: #334155; --shadow-color: rgba(0, 0, 0, 0.3); --bg-animated: linear-gradient(135deg, #0f2027, #203a43, #2c5364); --gradient-border: linear-gradient(145deg, #22d3ee, #818cf8); --gradient-text: var(--gradient-border); --glow-color: rgba(34, 211, 238, 0.5); }
         .theme-eye-care { --bg-primary: #2c2520; --bg-secondary: #3b302a; --text-primary: #e0d5ce; --text-secondary: #c5b8b1; --border-color: #5a4b44; --shadow-color: rgba(0, 0, 0, 0.3); --bg-animated: linear-gradient(135deg, #3a2d27, #5c4b41, #3a2d27); --gradient-border: linear-gradient(145deg, #f59e0b, #fbbf24); --gradient-text: var(--gradient-border); --glow-color: rgba(245, 158, 11, 0.6); }
         
         body { background-color: var(--bg-primary); color: var(--text-primary); transition: background-color 0.4s ease, color 0.4s ease; }
         .bg-secondary { background-color: var(--bg-secondary); }
-        .text-secondary { color: var(--text-secondary); }
-        .border-custom { border-color: var(--border-color); }
-        .shadow-custom-lg { box-shadow: 0 25px 50px -12px var(--shadow-color), 0 0 15px var(--shadow-color); }
         
         #animated-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-animated); background-size: 200% 200%; z-index: -1; animation: gradient-animation 20s ease infinite; }
         @keyframes gradient-animation { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
         .gradient-border-container { padding: 2px; border-radius: 1.7rem; background: var(--gradient-border); transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .gradient-border-container:not(.breathing-glow):hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 30px 60px -15px var(--shadow-color); }
-        
         .gradient-text { background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        /* Ensure animations don't cause overflow issues */
-        .content-card { opacity: 0; transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
-        .content-card.float-in-left { transform: translateX(-100px) scale(0.95); }
-        .content-card.float-in-right { transform: translateX(100px) scale(0.95); }
-        .content-card.is-visible { opacity: 1; transform: translateX(0) scale(1); }
-
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-        .animate-pulse-custom { animation: pulse 2.5s infinite; }
-        [x-cloak] { display: none !important; }
-
-        .focus-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 99; }
-        .subtle-glow { text-shadow: 0 0 8px var(--glow-color), 0 0 10px var(--glow-color); transition: text-shadow 0.4s ease; }
-
-        .form-input, .form-select {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-        .form-input:focus, .form-select:focus {
-            outline: none;
-            border-color: var(--glow-color);
-            box-shadow: 0 0 0 2px var(--glow-color);
-        }
-        .form-select {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-            background-position: right 0.5rem center;
-            background-repeat: no-repeat;
-            background-size: 1.5em 1.5em;
-            padding-right: 2.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .diagnostic-question-text { font-size: 1rem; line-height: 1.5rem; }
-            .diagnostic-option-text { font-size: 0.9rem; line-height: 1.4rem; padding: 0.75rem !important; }
-        }
-
-        /* === START: PRELIMS PULSE FIX (v4 - FINAL) === */
-        
-        /* हम ओरिजिनल flipper CSS को वापस ला रहे हैं */
-        .flipper { perspective: 1000px; }
-        .flipper-inner {  
-            position: relative;  
-            transition: transform 0.8s;  
-            transform-style: preserve-3d;
-            height: 100%;  
-        }
-        .flipper.is-flipped .flipper-inner { transform: rotateY(180deg); }
-        
-        .front, .back {  
-            position: absolute;  
-            width: 100%;  
-            height: 100%;  
-            -webkit-backface-visibility: hidden;  
-            backface-visibility: hidden;  
-        }
-        .back { transform: rotateY(180deg); }
-
-        /* * यह नया फिक्स है:
-         * हम कार्ड को नहीं, बल्कि कार्ड के *अंदर* वाले कंटेंट div को स्क्रॉल-योग्य बनाएँगे।
-        */
-        .prelims-inner-content {
-            /* यह कंटेंट एरिया को एक अधिकतम ऊँचाई देता है */
-            max-height: 70vh; /* स्क्रीन की ऊँचाई का 70% */
-            
-            /* यदि कंटेंट लंबा होता है, तो स्क्रॉलबार दिखाता है */
-            overflow-y: auto;
-        }
-        
-        /* स्क्रॉलबार की स्टाइलिंग */
-        .prelims-inner-content::-webkit-scrollbar {
-            width: 8px;
-        }
-        .prelims-inner-content::-webkit-scrollbar-track {
-            background: var(--bg-primary);
-            border-radius: 4px;
-        }
-        .prelims-inner-content::-webkit-scrollbar-thumb {
-            background-color: var(--border-color);
-            border-radius: 4px;
-            border: 2px solid var(--bg-primary);
-        }
-        /* === END: PRELIMS PULSE FIX === */
-        
-        @keyframes breathing-glow-animation {
-            0% { box-shadow: 0 0 15px 0px var(--glow-color); }
-            50% { box-shadow: 0 0 30px 5px var(--glow-color); }
-            100% { box-shadow: 0 0 15px 0px var(--glow-color); }
-        }
+        @keyframes breathing-glow-animation { 0% { box-shadow: 0 0 15px 0px var(--glow-color); } 50% { box-shadow: 0 0 30px 5px var(--glow-color); } 100% { box-shadow: 0 0 15px 0px var(--glow-color); } }
         .breathing-glow { animation: breathing-glow-animation 4s ease-in-out infinite; }
-
-        /* ================================================= */
-        /* == START: Diagnostic Question Overflow Fix     == */
-        /* ================================================= */
-
-        /* This class targets the question text area in your diagnostic test modal. */
-        .diagnostic-question-text {
-            /* These properties ensure long text wraps correctly and doesn't expand the card horizontally. */
-            overflow-wrap: break-word; /* For modern browsers */
-            word-wrap: break-word;     /* For older browsers */
-            word-break: break-word;    /* A fallback to prevent layout breaking */
-            
-            /* This is the key part for the scrolling behavior. */
-            /* We set a maximum height for the question area. */
-            max-height: 40vh; /* You can adjust this value. 40vh means 40% of the viewport's height. */
-            
-            /* When the content exceeds max-height, a vertical scrollbar will appear. */
-            overflow-y: auto;
-            
-            /* Add some padding on the right to prevent the scrollbar from overlapping the text. */
-            padding-right: 1rem;
-        }
-        
-        /* Optional: Improve the appearance of the scrollbar for Webkit browsers (Chrome, Safari) */
-        .diagnostic-question-text::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        .diagnostic-question-text::-webkit-scrollbar-track {
-            background: var(--bg-primary);
-            border-radius: 4px;
-        }
-        
-        .diagnostic-question-text::-webkit-scrollbar-thumb {
-            background-color: var(--border-color);
-            border-radius: 4px;
-            border: 2px solid var(--bg-primary);
-        }
-
-        /* =============================================== */
-        /* == END: Diagnostic Question Overflow Fix     == */
-        /* =============================================== */
+        .content-card { opacity: 0; transition: opacity 0.8s ease, transform 0.8s ease; }
+        .content-card.is-visible { opacity: 1; transform: translateY(0); }
+        .subtle-glow { text-shadow: 0 0 8px var(--glow-color); }
+        [x-cloak] { display: none !important; }
     </style>
 </head>
 
-<body x-data="site()" :class="theme" @keydown.escape="showDiagnostic = false; showComingSoon = false; showExitMessage = false" x-on:close-diagnostic.window="showDiagnostic = false">
+<body x-data="site()" :class="theme">
 
-    <div x-show="focusMode" x-transition.opacity.duration.300 class="focus-overlay" x-cloak></div>
     <div id="animated-bg"></div>
 
     <header class="bg-secondary/80 backdrop-blur-sm shadow-md fixed w-full top-0 z-[100] transition-all duration-300">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <div x-data="{ flipped: false }" @click="flipped = !flipped; setTimeout(() => flipped = false, 2000)" class="flipper cursor-pointer" :class="{ 'is-flipped': flipped }">
-                <div class="flipper-inner" style="width: 200px; height: 50px;">
-                    <div class="front flex items-center">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center shadow-lg">
-                                <span class="text-3xl font-bold text-white">T</span>
-                            </div>
-                            <div>
-                                <h1 class="text-2xl font-bold text-indigo-500">Testology</h1>
-                                <p class="text-xs text-secondary hidden sm:block font-medium subtle-glow">"Two tests a day keep failure away"</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="back flex items-center">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center shadow-lg"><span class="text-3xl font-bold text-white">🤫</span></div>
-                            <div>
-                                <h1 class="text-md font-bold text-pink-500">पढ़ाई में ध्यान दो!</h1>
-                                <p class="text-xs text-secondary hidden sm:block font-medium">(Focus on your studies!)</p>
-                            </div>
-                        </div>
-                    </div>
+            
+            <div class="flex items-center space-x-3">
+                <div class="relative group">
+                    <img src="Testology-logo.png" alt="Testology Logo" 
+                         class="w-12 h-12 rounded-full object-contain shadow-lg bg-white border-2 border-transparent group-hover:border-indigo-400 transition-all duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-indigo-500 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity -z-10"></div>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-indigo-500 flex items-start leading-none">
+                        Testology
+                        <sup class="text-[0.4em] font-medium text-indigo-300 mt-1 ml-0.5 tracking-tighter">TM</sup>
+                    </h1>
+                    <p class="text-xs text-secondary hidden sm:block font-medium subtle-glow tracking-wide mt-0.5">"Two tests a day keep failure away"</p>
                 </div>
             </div>
+
             <div class="hidden md:flex items-center space-x-4">
-                <a href="index.html" class="font-medium text-secondary hover:text-indigo-500 px-3 py-2">Home</a>
-                <a href="#prelims-pulse" class="font-medium text-secondary hover:text-indigo-500 px-3 py-2">Prelims Pulse</a>
-                <a href="#mcq-zones" class="font-medium text-secondary hover:text-indigo-500 px-3 py-2">MCQ Zones</a>
-                <a href="#clarity-hub" class="font-medium text-secondary hover:text-indigo-500 px-3 py-2">Clarity Hub</a>
-                <a href="#youtube" class="font-medium text-secondary hover:text-indigo-500 px-3 py-2">Videos</a>
-                <button @click="toggleTheme()" class="p-2 rounded-full hover:bg-primary/50"><span x-text="themeIcons[currentThemeIndex]"></span></button>
+                <a href="index.html" class="font-medium text-secondary hover:text-indigo-500 px-3 py-2 transition">Home</a>
+                <a href="index.html#prelims-pulse" class="font-medium text-secondary hover:text-indigo-500 px-3 py-2 transition">Prelims</a>
+                <a href="index.html#mains-zone" class="font-medium text-secondary hover:text-indigo-500 px-3 py-2 transition">Mains</a>
+                <a href="about.html" class="font-medium text-indigo-500 font-bold px-3 py-2 transition border-b-2 border-indigo-500">About</a>
+                <button @click="toggleTheme()" class="p-2 rounded-full hover:bg-primary/50 transition"><span x-text="themeIcons[currentThemeIndex]"></span></button>
             </div>
+
             <div x-data="{ open: false }" class="md:hidden">
                 <button @click="open = !open" class="text-primary focus:outline-none"><svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
-                <div x-show="open" @click.away="open = false" x-transition class="absolute top-16 right-4 mt-2 w-48 bg-secondary rounded-lg shadow-lg z-20">
-                    <a href="index.html" @click="open = false" class="block px-4 py-2 text-secondary hover:bg-primary">Home</a>
-                    <a href="#prelims-pulse" @click="open = false" class="block px-4 py-2 text-secondary hover:bg-primary">Prelims Pulse</a>
-                    <a href="#mcq-zones" @click="open = false" class="block px-4 py-2 text-secondary hover:bg-primary">MCQ Zones</a>
-                    <a href="#clarity-hub" @click="open = false" class="block px-4 py-2 text-secondary hover:bg-primary">Clarity Hub</a>
-                    <a href="#youtube" @click="open = false" class="block px-4 py-2 text-secondary hover:bg-primary">Videos</a>
+                <div x-show="open" @click.away="open = false" x-transition class="absolute top-16 right-4 mt-2 w-48 bg-secondary rounded-lg shadow-lg z-20 border border-custom">
+                    <a href="index.html" class="block px-4 py-2 text-secondary hover:bg-primary">Home</a>
+                    <a href="index.html#prelims-pulse" class="block px-4 py-2 text-secondary hover:bg-primary">Prelims Pulse</a>
+                    <a href="index.html#mains-zone" class="block px-4 py-2 text-secondary hover:bg-primary">Mains Zone</a>
                     <div class="border-t border-custom"></div>
                     <button @click="toggleTheme(); open = false" class="w-full text-left px-4 py-2 text-secondary hover:bg-primary flex items-center">Change Theme <span class="ml-auto" x-text="themeIcons[currentThemeIndex]"></span></button>
                 </div>
@@ -247,781 +96,129 @@ h2 {
         </nav>
     </header>
 
-    <main class="relative pt-20 pb-24 space-y-28 md:space-y-40">
-    <div class="content-card is-visible"> 
-        <section id="about-us" class="container mx-auto px-6">
-            <div class="gradient-border-container breathing-glow">
-                <div class="p-8 md:p-12 bg-secondary rounded-3xl relative z-10 text-center">
-                    <h2 class="text-4xl md:text-4xl font-bold mb-4 gradient-text">Testology: हमारे बारे में</h2>
-                    
-                    <h3 class="text-2xl font-semibold mt-8 mb-4">हमारा मिशन: हर छात्र को उसकी सही राह दिखाना</h3>
-                    <p class="text-secondary max-w-4xl mx-auto mb-6">
-                        Testology सिर्फ़ एक टेस्ट प्लेटफ़ॉर्म नहीं है, यह भरोसे और मार्गदर्शन का एक वादा है। हमारा मिशन स्पष्ट है: हर छात्र को उसकी अद्वितीय क्षमता के बारे में जागरूक करना और उसे सही लक्ष्य की तैयारी के लिए प्रेरित करना—ताकि आप **दुनिया को दिखाने के लिए नहीं, बल्कि खुद के लिए** पढ़ें।
-                    </p>
-                    
-                    <h3 class="text-2xl font-semibold mt-10 mb-4">हमारी कहानी: अनुभव से उपजा समाधान</h3>
-                    <p class="text-secondary max-w-4xl mx-auto mb-6">
-                        Testology की नींव सच्चे अनुभव से जुड़ी है। हमारे Founder ने खुद UPSC सिविल सेवा परीक्षा में **कई बार असफलता** का सामना किया। इस व्यक्तिगत संघर्ष ने हमें प्रेरित किया कि अगर कोई **भरोसेमंद सिस्टम** होता जो पहले ही हमें हमारी सही क्षमता बता देता, तो हमने अपना समय और ऊर्जा सही जगह लगाई होती। यही कारण है कि Testology टीम ने एक ऐसा **वैज्ञानिक और गहन सेल्फ-एवैल्युएशन सिस्टम** तैयार किया है जो आपको अनावश्यक संघर्ष से बचाता है।
-                    </p>
-
-                    <h3 class="text-2xl font-semibold mt-10 mb-4">हमारी विशेषता: डेटा-चालित तैयारी</h3>
-                    <p class="text-secondary max-w-4xl mx-auto mb-6">
-                        हमारा डेटा-चालित सिस्टम आपको PYQ, Current Affairs, और Mindset Tests के आधार पर सटीक फीडबैक देता है। हम सक्रिय सहभागिता (Active Engagement) और **'ज्ञान रत्न'** पुरस्कारों के माध्यम से छात्रों को प्रेरित करते हैं।
-                    </p>
-
-                </div>
-            </div>
-        </section>
-    </div>
-</main>    
-    <div x-show="showDiagnostic" class="fixed inset-0 z-[100] flex items-center justify-center p-4" x-cloak>
-        <div @click.away="$dispatch('close-diagnostic')" x-show="showDiagnostic" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="bg-secondary rounded-3xl shadow-custom-lg w-full max-w-5xl max-h-[95vh] md:max-h-[90vh] overflow-y-auto" x-data="diagnosticTest()">
-            <div class="p-6 md:p-12 relative">
-                <button @click="$dispatch('close-diagnostic')" class="absolute top-4 right-4 text-secondary hover:text-indigo-500 text-3xl z-10">&times;</button>
-                
-                <div x-show="currentView === 'languageSelection'" x-transition.opacity.duration.100 class="text-center max-w-3xl mx-auto">
-                    <h2 class="text-3xl font-bold mb-4">Choose Your Language</h2>
-                    <h3 class="text-2xl font-bold mb-8">अपनी भाषा चुनें</h3>
-                    <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8">
-                        <button @click="setLanguage('en')" class="bg-indigo-600 text-white font-bold py-4 px-10 rounded-lg hover:bg-indigo-700 transition w-full sm:w-auto">English</button>
-                        <button @click="setLanguage('hi')" class="bg-pink-600 text-white font-bold py-4 px-10 rounded-lg hover:bg-pink-700 transition w-full sm:w-auto">हिन्दी</button>
-                    </div>
-                </div>
-
-                <div x-show="currentView === 'overview'" x-transition.opacity.duration.100 class="text-center max-w-3xl mx-auto">
-                     <h2 class="text-3xl font-bold mb-4" x-text="language === 'hi' ? 'आपके आत्म-मूल्यांकन में आपका स्वागत है!' : 'Welcome to Your Self-Evaluation!'"></h2>
-                     <p class="text-secondary mb-8" x-text="language === 'hi' ? 'यह टेस्ट सिर्फ आपके ज्ञान की जाँच नहीं करता, बल्कि यह एक एस्पिरेंट के रूप में आपकी पूरी शख्सियत का विश्लेषण करता है। अगले 5 छोटे टेस्टों में, हम आपकी तैयारी के विभिन्न आयामों को परखेंगे:' : 'This test doesn\'t just check your knowledge; it analyzes your entire personality as an aspirant. In the next 5 short tests, we will assess different dimensions of your preparation:'"></p>
-                     <ul class="space-y-4 text-left mb-8">
-                         <template x-for="section in activeSections" :key="section.name">
-                             <li class="flex items-start space-x-3">
-                                 <span class="text-2xl" x-text="section.icon"></span>
-                                 <div>
-                                     <h4 class="font-semibold" x-text="section.name"></h4>
-                                     <p class="text-sm text-secondary" x-text="section.description"></p>
-                                 </div>
-                             </li>
-                         </template>
-                     </ul>
-                     <p class="text-secondary italic mb-8" x-text="language === 'hi' ? 'कृपया सभी प्रश्नों के उत्तर ईमानदारी से दें। यह टेस्ट आपके लिए है, दुनिया के लिए नहीं।' : 'Please answer all questions honestly. This test is for you, not for the world.'"></p>
-                     <button @click="currentView = 'test'" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 transition" x-text="language === 'hi' ? 'मैं समझ गया, चलिए शुरू करते हैं' : 'I Understand, Let\'s Begin'"></button>
-                </div>
-
-                <div x-show="currentView === 'test' && (currentSection().type === 'mcq' || currentSection().type === 'mindset')" x-transition.opacity.duration.100>
-                    <h2 class="text-2xl font-bold mb-2 text-center" x-text="currentSection().name"></h2>
-                    <p class="text-center text-secondary mb-6" x-text="`${language === 'hi' ? 'प्रश्न' : 'Question'} ${currentQuestionIndex + 1} / ${currentSection().questions.length}`"></p>
-                    <div class="w-full bg-secondary/50 rounded-full h-2.5 mb-8 border border-custom">
-                        <div class="bg-indigo-500 h-full rounded-full transition-all duration-500" :style="`width: ${progressPercentage}%`"></div>
-                    </div>
-                    <div class="text-left max-w-4xl mx-auto">
-                        <p class="text-lg font-semibold mb-4 whitespace-pre-line diagnostic-question-text" x-text="`Q. ${currentQuestion().question}`"></p>
-                        <div class="space-y-3">
-                            <template x-for="(option, index) in currentQuestion().options" :key="index">
-                                <button @click="selectAnswer(index)" class="w-full text-left p-4 border rounded-lg transition-colors duration-300 diagnostic-option-text border-custom hover:bg-indigo-500/10" :class="{'border-indigo-500 ring-2 ring-indigo-500': index === currentQuestion().selectedAnswerIndex }">
-                                    <span x-text="option"></span>
-                                </button>
-                            </template>
-                        </div>
-                    </div>
-                    <div class="mt-8 text-center">
-                         <button @click="next()" :disabled="currentQuestion().selectedAnswerIndex === null" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 transition disabled:bg-gray-400" x-text="isLastQuestionOfSection() ? (language === 'hi' ? 'सेक्शन जमा करें' : 'Submit Section') : (language === 'hi' ? 'अगला प्रश्न →' : 'Next Question →')"></button>
-                    </div>
-                </div>
-                
-                <div x-show="currentView === 'test' && currentSection().type === 'litmus'" x-transition.opacity.duration.100 class="text-center max-w-4xl mx-auto">
-                    <h2 class="text-2xl font-bold mb-4" x-text="currentSection().name"></h2>
-                    <div class="p-6 border border-custom rounded-2xl bg-primary/20 mb-6">
-                        <h3 class="text-lg font-bold" x-text="currentSection().article.headline"></h3>
-                    </div>
-                    <p class="text-secondary mb-6" x-text="language === 'hi' ? 'इस समाचार को पढ़ने के बाद, एक Aspirant के रूप में अपने विचारों का विश्लेषण करें। जब आप तैयार हों, तो परिणाम देखने के लिए नीचे क्लिक करें।' : 'After reading this news, analyze your thoughts as an Aspirant. When you are ready, click below to see the analysis.'"></p>
-                    
-                    <div x-data="{ showAnalysis: false }">
-                        <button @click="showAnalysis = true" x-show="!showAnalysis" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 transition" x-text="language === 'hi' ? 'विश्लेषण देखें' : 'Show Analysis'"></button>
-                        
-                        <div x-show="showAnalysis" x-transition.opacity.duration.500 class="text-left grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                            <div class="p-4 border border-red-500/50 rounded-lg bg-red-500/10">
-                                <h4 class="font-bold text-red-400 mb-2" x-text="currentSection().article.citizenView.title"></h4>
-                                <ul class="list-disc list-inside text-secondary space-y-1">
-                                    <template x-for="point in currentSection().article.citizenView.points" :key="point">
-                                        <li x-text="point"></li>
-                                    </template>
-                                </ul>
-                            </div>
-                            <div class="p-4 border border-green-500/50 rounded-lg bg-green-500/10">
-                                <h4 class="font-bold text-green-400 mb-2" x-text="currentSection().article.aspirantView.title"></h4>
-                                <ul class="list-disc list-inside text-secondary space-y-1">
-                                     <template x-for="point in currentSection().article.aspirantView.points" :key="point">
-                                        <li x-text="point"></li>
-                                    </template>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="mt-8 text-center" x-show="showAnalysis">
-                            <button @click="next()" class="bg-green-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-green-700 transition" x-text="language === 'hi' ? 'आगे बढ़ें' : 'Continue'"></button>
-                        </div>
-                    </div>
-                </div>
-
-                <div x-show="currentView === 'test' && currentSection().type === 'structure'" x-transition.opacity.duration.100 class="text-center max-w-4xl mx-auto">
-                    <h2 class="text-2xl font-bold mb-4" x-text="currentSection().name"></h2>
-                    <div class="p-6 border border-custom rounded-2xl bg-primary/20 mb-6 text-left">
-                        <h3 class="font-bold" x-text="currentSection().question.title"></h3>
-                        <p class="text-lg" x-text="currentSection().question.text"></p>
-                    </div>
-                     <p class="text-secondary mb-6" x-text="language === 'hi' ? 'इस प्रश्न के लिए एक आदर्श उत्तर संरचना (परिचय, मुख्य भाग, निष्कर्ष) के बारे में सोचें। जब आप तैयार हों, तो हमारी आदर्श संरचना देखने के लिए नीचे क्लिक करें।' : 'Think about an ideal answer structure (Intro, Body, Conclusion) for this question. When you are ready, click below to see our ideal structure.'"></p>
-
-                    <div x-data="{ showStructure: false }">
-                        <button @click="showStructure = true" x-show="!showStructure" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 transition" x-text="language === 'hi' ? 'आदर्श संरचना देखें' : 'Show Ideal Structure'"></button>
-
-                        <div x-show="showStructure" x-transition.opacity.duration.500 class="text-left p-6 border border-indigo-500/50 rounded-lg bg-indigo-500/10 mt-6 space-y-4">
-                            <h3 class="text-xl font-bold text-center text-indigo-400" x-text="currentSection().idealStructure.title"></h3>
-                            <div>
-                                <h4 class="font-semibold" x-text="currentSection().idealStructure.intro.title"></h4>
-                                <p class="text-secondary" x-text="currentSection().idealStructure.intro.text"></p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold" x-text="currentSection().idealStructure.body.title"></h4>
-                                <ul class="list-decimal list-inside text-secondary space-y-1">
-                                    <template x-for="point in currentSection().idealStructure.body.points" :key="point">
-                                        <li x-text="point"></li>
-                                    </template>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold" x-text="currentSection().idealStructure.conclusion.title"></h4>
-                                <p class="text-secondary" x-text="currentSection().idealStructure.conclusion.text"></p>
-                            </div>
-                        </div>
-
-                        <div class="mt-8 text-center" x-show="showStructure">
-                            <button @click="next()" class="bg-green-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-green-700 transition" x-text="language === 'hi' ? 'आगे बढ़ें' : 'Continue'"></button>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div x-show="currentView === 'summary'" x-transition.opacity.duration.100 class="text-center">
-                    <h2 class="text-3xl font-bold mb-4" x-text="`${activeSections[currentSectionIndex].name} ${language === 'hi' ? 'पूरा हुआ!' : 'Completed!'}`"></h2>
-                    <template x-if="activeSections[currentSectionIndex].type === 'mcq' || activeSections[currentSectionIndex].type === 'mindset'">
-                        <div>
-                             <p class="text-lg text-secondary mb-2" x-text="language === 'hi' ? 'इस सेक्शन में आपका स्कोर:' : 'Your Score in this section:'"></p>
-                             <p class="text-5xl font-bold text-indigo-400 mb-6" x-text="`${sectionScores[currentSectionIndex]} / ${activeSections[currentSectionIndex].questions.length}`"></p>
-                        </div>
-                    </template>
-                    <p class="max-w-2xl mx-auto text-secondary mb-8" x-text="activeSections[currentSectionIndex].summaryMessage"></p>
-                    <button @click="nextSection()" class="bg-green-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-green-700 transition" x-text="isLastSection() ? (language === 'hi' ? 'समाप्त करें और फाइनल रिपोर्ट देखें' : 'Finish & See Final Report') : (language === 'hi' ? 'अगले टेस्ट पर जाएं' : 'Continue to Next Test')"></button>
-                </div>
-
-                <div x-show="currentView === 'report'" x-transition.opacity.duration.100 class="text-center">
-                    <h2 class="text-3xl font-bold mb-4" x-text="language === 'hi' ? 'आपका व्यापक विश्लेषण' : 'Your Comprehensive Analysis'"></h2>
-                       <div class="p-6 bg-secondary border border-custom rounded-lg text-left max-w-3xl mx-auto">
-                           <div class="text-center mb-6 pb-4 border-b border-custom">
-                               <p class="text-lg font-medium text-secondary" x-text="language === 'hi' ? 'कुल स्कोर' : 'Overall Score'"></p>
-                               <p class="font-bold text-4xl text-indigo-400" x-text="`${calculateTotalScore()} / ${totalQuestions}`"></p>
-                               <p class="font-semibold text-xl mt-2" x-text="`${language === 'hi' ? 'आपकी एस्पिरेंट प्रोफाइल:' : 'Your Aspirant Profile:'} ${getProfile()}`"></p>
-                           </div>
-                           <div class="space-y-4">
-                               <template x-for="feedback in getDetailedFeedback()" :key="feedback.title">
-                                   <div class="p-3 bg-primary/20 rounded-md">
-                                       <h4 class="font-semibold" x-text="feedback.title"></h4>
-                                       <p class="text-sm text-secondary mb-1" x-show="feedback.type === 'mcq' || feedback.type === 'mindset'" x-text="`${language === 'hi' ? 'स्कोर:' : 'Score:'} ${feedback.score} / ${feedback.total}`"></p>
-                                       <p class="text-sm"><strong class="text-primary/80" x-text="language === 'hi' ? 'विश्लेषण:' : 'Analysis:'"></strong> <span class="text-secondary" x-text="feedback.analysis"></span></p>
-                                       <p class="text-sm"><strong class="text-indigo-400" x-text="language === 'hi' ? 'अगला कदम:' : 'Next Step:'"></strong> <span class="text-secondary" x-text="feedback.nextStep"></span></p>
-                                   </div>
-                               </template>
-                           </div>
-                       </div>
-                       <button @click="$dispatch('close-diagnostic')" class="mt-8 bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 transition" x-text="language === 'hi' ? 'बंद करें' : 'Close'"></button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div x-show="showExitMessage" 
-         class="fixed inset-0 z-[110] flex items-end justify-end p-4 sm:p-8 pointer-events-none" 
-         x-cloak 
-         x-transition:enter="transition ease-out duration-300" 
-         x-transition:enter-start="opacity-0" 
-         x-transition:enter-end="opacity-100" 
-         x-transition:leave="transition ease-in duration-200" 
-         x-transition:leave-start="opacity-100" 
-         x-transition:leave-end="opacity-0">
+    <main class="relative pb-24 space-y-20">
         
-        <div @click.away="showExitMessage = false" 
-             class="bg-secondary rounded-3xl shadow-custom-lg w-full max-w-sm text-center p-6 relative transform scale-100 transition-all duration-300 pointer-events-auto"
-             :class="{
-                'theme-dark': theme === 'theme-light',
-                'theme-eye-care': theme === 'theme-dark',
-                'theme-light': theme === 'theme-eye-care',
-                'breathing-glow': showExitMessage
-             }"
-             >
-            <p class="text-lg font-semibold text-primary mb-5 whitespace-pre-line" x-html="exitMessageContent"></p>
-            
-            <button @click="showExitMessage = false" 
-                class="mt-2 bg-indigo-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-indigo-700 transition text-sm">
-                I Understand, Kal Milte Hain!
-            </button>
-            <p class="text-xs text-secondary mt-3">Thank you for visiting Testology.</p>
+        <div class="content-card is-visible"> 
+            <section class="container mx-auto px-6">
+                <div class="gradient-border-container breathing-glow">
+                    <div class="p-8 md:p-16 bg-secondary rounded-3xl relative z-10 text-center">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-4 gradient-text hindi-fix">
+                            Testology: हमारे बारे में
+                        </h2>
+                        <p class="text-lg md:text-xl text-secondary max-w-3xl mx-auto italic font-medium mt-4">
+                            "हम सिर्फ एक प्लेटफॉर्म नहीं, आपकी सफलता के सफर के साथी हैं।"
+                        </p>
+                    </div>
+                </div>
+            </section>
         </div>
-    </div>
-    <div x-show="showComingSoon" class="fixed inset-0 z-[100] flex items-center justify-center p-4" x-cloak>
-        <div @click.away="showComingSoon = false" x-show="showComingSoon" x-transition class="bg-secondary rounded-3xl shadow-custom-lg w-full max-w-lg text-center p-8">
-            <h2 class="text-2xl font-bold mb-4 gradient-text">Coming Soon!</h2>
-            <p class="text-secondary" x-text="comingSoonMessage"></p>
-            <button @click="showComingSoon = false" class="mt-6 bg-indigo-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-indigo-700 transition">Got it!</button>
+
+        <div class="content-card is-visible">
+            <section class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="p-8 bg-secondary rounded-3xl border border-custom shadow-lg hover:shadow-indigo-500/20 transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-indigo-500/10 rounded-2xl flex items-center justify-center mb-6 text-4xl">🎯</div>
+                        <h3 class="text-2xl font-bold mb-4 text-primary">हमारा मिशन (Our Mission)</h3>
+                        <p class="text-secondary leading-relaxed">
+                            हर एस्पिरेंट को उसकी <strong>वास्तविक क्षमता</strong> (True Potential) का एहसास दिलाना। हमारा लक्ष्य आपको अनावश्यक सामग्री की भीड़ से बचाकर, <strong>सटीक, वैज्ञानिक और डेटा-आधारित</strong> मार्गदर्शन प्रदान करना है।
+                        </p>
+                    </div>
+                    <div class="p-8 bg-secondary rounded-3xl border border-custom shadow-lg hover:shadow-pink-500/20 transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-pink-500/10 rounded-2xl flex items-center justify-center mb-6 text-4xl">💡</div>
+                        <h3 class="text-2xl font-bold mb-4 text-primary">हमारा विज़न (Our Vision)</h3>
+                        <p class="text-secondary leading-relaxed">
+                            एक ऐसा एजुकेशन इकोसिस्टम बनाना जहाँ छात्र <strong>'दुनिया को दिखाने के लिए'</strong> नहीं, बल्कि <strong>'खुद को सक्षम बनाने के लिए'</strong> पढ़ें। हम रटने की जगह <strong>समझने</strong> और <strong>विश्लेषण (Analysis)</strong> की संस्कृति बनाना चाहते हैं।
+                        </p>
+                    </div>
+                </div>
+            </section>
         </div>
-    </div>
-    
-    <button x-show="scrolledFromTop" @click="window.scrollTo({ top: 0, behavior: 'smooth' })" x-transition class="fixed bottom-8 right-8 bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 z-50">
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
-    </button>
-    
+
+        <div class="content-card is-visible">
+            <section class="container mx-auto px-6">
+                <div class="relative bg-gradient-to-br from-indigo-900 to-slate-900 rounded-3xl p-8 md:p-12 overflow-hidden shadow-2xl">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+                    <div class="absolute bottom-0 left-0 w-64 h-64 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+                    
+                    <div class="relative z-10 text-left">
+                        <h3 class="text-3xl font-bold text-white mb-6 border-l-4 border-indigo-400 pl-4">एक अनुभव, एक शुरुआत</h3>
+                        <div class="text-gray-300 space-y-4 text-lg leading-relaxed font-light">
+                            <p>
+                                <strong class="text-white">Testology</strong> किसी कॉर्पोरेट मीटिंग रूम में नहीं, बल्कि एक एस्पिरेंट के स्टडी रूम में पैदा हुआ विचार है।
+                            </p>
+                            <p>
+                                हमारे फाउंडर ने सिविल सेवा परीक्षा की तैयारी के दौरान <strong>असफलता का दर्द</strong> और <strong>भटकाव की पीड़ा</strong> को करीब से महसूस किया। उन्होंने पाया कि बाज़ार में कंटेंट की बाढ़ है, लेकिन <strong>'सही दिशा'</strong> की कमी है।
+                            </p>
+                            <p class="italic text-indigo-200 font-medium bg-white/5 p-4 rounded-r-xl border-l-2 border-pink-500">
+                                "काश! कोई मुझे पहले ही बता देता कि मेरी गलती कहाँ हो रही है, तो शायद परिणाम कुछ और होता।"
+                            </p>
+                            <p>
+                                इसी एक विचार ने Testology को जन्म दिया। एक ऐसा सिस्टम जो आपको <strong>झूठी तसल्ली</strong> नहीं, बल्कि <strong>सच्चा आईना</strong> दिखाए।
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="content-card is-visible">
+            <section class="container mx-auto px-6 text-center">
+                <h3 class="text-3xl font-bold mb-10 gradient-text hindi-fix">Testology ही क्यों?</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-6 bg-secondary rounded-2xl border border-custom hover:border-indigo-500 transition duration-300">
+                        <div class="text-4xl mb-4">📊</div>
+                        <h4 class="font-bold text-xl mb-2 text-primary">डेटा-चालित तैयारी</h4>
+                        <p class="text-sm text-secondary">हम हवा में बातें नहीं करते। आपका हर टेस्ट, हर क्लिक हमारे लिए एक डेटा पॉइंट है जो आपकी कमजोरी बताता है।</p>
+                    </div>
+                    <div class="p-6 bg-secondary rounded-2xl border border-custom hover:border-pink-500 transition duration-300">
+                        <div class="text-4xl mb-4">🧠</div>
+                        <h4 class="font-bold text-xl mb-2 text-primary">माइंडसेट पर फोकस</h4>
+                        <p class="text-sm text-secondary">एग्जाम नॉलेज का नहीं, नसों (Nerves) का खेल है। हम आपको मानसिक रूप से मजबूत बनाते हैं।</p>
+                    </div>
+                    <div class="p-6 bg-secondary rounded-2xl border border-custom hover:border-yellow-500 transition duration-300">
+                        <div class="text-4xl mb-4">🏆</div>
+                        <h4 class="font-bold text-xl mb-2 text-primary">गेमिफिकेशन</h4>
+                        <p class="text-sm text-secondary">पढ़ाई बोरिंग क्यों हो? 'ज्ञान रत्न' और लीडरबोर्ड के साथ तैयारी को एक खेल की तरह मज़ेदार बनाएं।</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
     <footer class="bg-secondary border-t border-custom relative z-10">
         <div class="container mx-auto px-6 py-8 text-center text-secondary">
-              <p>&copy; 2025 Testology. All Rights Reserved.</p>
+             <p>&copy; 2025 Testology. All Rights Reserved.</p>
         </div>
     </footer>
 
     <script>
-        // 🌟 GOOGLE SHEET URL - AB DATA YAHAN SE LOAD HOGA
-        // Data fetch karne ke liye hum CSV output use karte hain
-        const PRELIMS_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vStDY-SBQBx93TiNy1SNbCJGzx2SBkEyW1vl2UsPj-rTthBOFRVesAoh50ZYsZTY6rZDgCr4q88LJDO/pub?output=csv&gid=0';
-
         function site() {
             return {
                 themes: ['theme-light', 'theme-dark', 'theme-eye-care'],
-                themeIcons: ['☀️', '🌙', '👁️'],
+                // ICONS UPDATED: Eye (👁️) replaced with Gear (⚙️)
+                themeIcons: ['☀️', '🌙', '⚙️'],
                 currentThemeIndex: 1,
-                showDiagnostic: false,
-                showComingSoon: false,
-                comingSoonMessage: '',
-                scrolledFromTop: false,
-                showExitMessage: false,
-                exitMessageContent: '',
-
-                get focusMode() {
-                    return this.showDiagnostic || this.showComingSoon || this.showExitMessage;
-                },
-
-                MOTIVATIONAL_QUOTES: [
-                    "आपकी दृढ़ता अद्भुत है। आज के लिए बस इतना ही। **कल फिर मिलते हैं**, अपनी तैयारी को अगले स्तर पर ले जाने के लिए।",
-                    "तैयारी एक मैराथन है, दौड़ नहीं। आज का ब्रेक **कल की गति** के लिए ज़रूरी है। **We will meet again.**",
-                    "The effort you put in today is always better than the regret of tomorrow. **Take a break, and we will catch up tomorrow.**",
-                    "ज्ञान की राह पर चलते रहें। **Don't lose your focus**। **कल फिर मिलेंगे**, और एक नया प्रश्न हल करेंगे।",
-                    "सफलता का रास्ता हर दिन तय की गई छोटी-छोटी दूरियों से बनता है। **We await your return.** Study well, **kal milte hain**.",
-                    "हार केवल एक अल्पविराम है, पूर्णविराम नहीं। **Keep writing your story.** We will meet again.",
-                    "याद रखें, सबसे कठिन संघर्ष के बाद ही सबसे शानदार जीत मिलती है। **A new challenge awaits you tomorrow!**",
-                    "धैर्य रखें, रोम एक दिन में नहीं बना था, और आप एक ऑफिसर बन रहे हैं। **Kal zaroor milenge**.",
-                    "Discipline is the bridge between goals and accomplishment. **Come back soon** for your next test, **kal phir milenge!**",
-                    "सपना वह नहीं जो आप नींद में देखें, सपना वह है जो आपको सोने न दे। **We will see you tomorrow.**",
-                    "आपकी सबसे बड़ी प्रेरणा आपके अंदर है। उसे जगाओ! **The quiet consistency always beats the loud intensity.**",
-                    "The best way to predict the future is to create it. **Rest your mind**, and come back energized. **Kal milenge!**",
-                    "तैयारी में लगा हर घंटा, सेवा में बिताए वर्षों का आधार है। **Your journey continues. Kal phir milenge!**",
-                    "जब आप थक जाते हैं, तब नहीं, जब आप कर लेते हैं, तब रुकें। **Don't stop when you are tired. See you soon!**"
-                ],
                 
                 get theme() { return this.themes[this.currentThemeIndex]; },
-                toggleTheme() { this.currentThemeIndex = (this.currentThemeIndex + 1) % this.themes.length; },
                 
-                showComingSoonModal(type) {
-                    if (type === 'MCQ Zone' || type === 'NCERT Test') {
-                        this.comingSoonMessage = "यह फीचर जल्द ही आ रहा है! हमारी विशेषज्ञ टीम आपके लिए हज़ारों उच्च-गुणवत्ता वाले प्रश्नों का एक विशाल बैंक तैयार कर रही है...";
-                    } else if (type === 'Doubt Hub') {
-                        this.comingSoonMessage = "हमारे विशेषज्ञ आपके संदेहों का उत्तर देने के लिए तैयार हो रहे हैं! यह सुविधा जल्द ही लॉन्च हो रही है...";
-                    }
-                    this.showComingSoon = true;
-                },
-
-                handleExitIntent(e) {
-                    if (e.clientY < 20 && !this.showExitMessage && !this.showDiagnostic && !this.showComingSoon) {
-                        const quotes = this.MOTIVATIONAL_QUOTES;
-                        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-                        
-                        this.exitMessageContent = randomQuote;
-                        this.showExitMessage = true;
-
-                        document.removeEventListener('mouseout', this.handleExitIntentBound);  
-                    }
+                toggleTheme() { 
+                    this.currentThemeIndex = (this.currentThemeIndex + 1) % this.themes.length; 
+                    localStorage.setItem('userThemeIndex', this.currentThemeIndex);
                 },
 
                 init() {
-                    window.addEventListener('scroll', () => { this.scrolledFromTop = window.scrollY > 200; });
+                    const savedThemeIndex = localStorage.getItem('userThemeIndex');
+                    if (savedThemeIndex !== null) {
+                        this.currentThemeIndex = parseInt(savedThemeIndex, 10);
+                    }
+                    
                     this.$nextTick(() => {
-                        const cards = document.querySelectorAll('.content-card');
-                        cards.forEach((card, index) => {
-                            if (index % 2 === 0) card.classList.add('float-in-left');
-                            else card.classList.add('float-in-right');
-                        });
                         const observer = new IntersectionObserver((entries) => {
                             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('is-visible'); });
                         }, { threshold: 0.1 });
-                        cards.forEach(card => observer.observe(card));
+                        document.querySelectorAll('.content-card').forEach(card => observer.observe(card));
                     });
-                    
-                    this.handleExitIntentBound = this.handleExitIntent.bind(this);
-                    document.addEventListener('mouseout', this.handleExitIntentBound);
-                }
-            }
-        }
-        
-        function diagnosticTest() {
-            return {
-                currentView: 'languageSelection', // 'languageSelection', 'overview', 'test', 'summary', 'report'
-                language: 'en', // 'en' or 'hi'
-                currentSectionIndex: 0,
-                currentQuestionIndex: 0,
-                sectionScores: [],
-                
-                sections: {
-                    en: [
-                        {  
-                            type: 'mindset',
-                            name: 'Test 1: UPSC Mindset Test',  
-                            icon: '🧠',  
-                            description: 'This test will assess your Mindset, Patience, and Motivation.',
-                            summaryMessage: "Excellent! Mental fortitude is the first step to success. Your mindset is your greatest asset.",  
-                            questions: [
-                                { question: 'Do you have a very strong reason to become a Civil Servant, which goes beyond just \'Power\', \'Prestige\', or \'Social Status\'?', options: ['Yes', 'No'], correctAnswerIndex: 0, selectedAnswerIndex: null },
-                                { question: 'Can you follow a routine of 6-8 hours of self-study daily for the next 365 days, without any external pressure?', options: ['Yes', 'No'], correctAnswerIndex: 0, selectedAnswerIndex: null },
-                                { question: 'If you don\'t succeed in your first attempt, will you learn from your mistakes and prepare again with double the effort?', options: ['Yes', 'No'], correctAnswerIndex: 0, selectedAnswerIndex: null },
-                                { question: 'This journey is often lonely. Are you prepared for this solitude?', options: ['Yes', 'No'], correctAnswerIndex: 0, selectedAnswerIndex: null },
-                                { question: 'When relatives or friends doubt your abilities, can you turn it into your motivation?', options: ['Yes', 'No'], correctAnswerIndex: 0, selectedAnswerIndex: null },
-                                { question: 'Are you ready to accept your mistakes and improve yourself based on feedback?', options: ['Yes', 'No'], correctAnswerIndex: 0, selectedAnswerIndex: null },
-                                { question: 'Do you know any strategy to manage failure, stress, and pressure?', options: ['Yes', 'No'], correctAnswerIndex: 0, selectedAnswerIndex: null },
-                                { question: 'Are you willing to voluntarily limit your social life, hobbies, and entertainment for the next 1-2 years?', options: ['Yes', 'No'], correctAnswerIndex: 0, selectedAnswerIndex: null },
-                                { question: 'When you study a topic, do questions like \'why\', \'how\', and \'what will be the impact\' naturally arise in your mind?', options: ['Yes', 'No'], correctAnswerIndex: 0, selectedAnswerIndex: null },
-                                { question: 'Do you have the ability to study consistently for 7 hours every day (instead of 14 hours for 2 days and then a 4-day break)?', options: ['Yes', 'No'], correctAnswerIndex: 0, selectedAnswerIndex: null }
-                            ]  
-                        },
-                        {  
-                            type: 'litmus',
-                            name: 'Test 2: Newspaper Litmus Test',  
-                            icon: '📰',  
-                            description: 'This will test whether you see news like a common citizen or an IAS Aspirant.',
-                            summaryMessage: "Self-reflection is key. Analyzing how you think is more important than scoring points.",
-                            article: {
-                                headline: "Supreme Court declares Electoral Bonds scheme unconstitutional, citing Transparency as the foundation of Democracy.",
-                                citizenView: {
-                                    title: "A Common Citizen's View:",
-                                    points: [
-                                        "Wow! The Supreme Court did a great job.",
-                                        "Now politicians won't get black money.",
-                                        "This is a big defeat for the government."
-                                    ]
-                                },
-                                aspirantView: {
-                                    title: "An IAS Aspirant's View (Multi-dimensional):",
-                                    points: [
-                                        "Prelims Facts: Links to Article 19(1)(a) - Right to Know, Judicial Review.",
-                                        "Mains GS-2: Great example for 'Transparency in Governance' & 'Electoral Reforms'.",
-                                        "Mains GS-4 (Ethics): Raises questions on Probity, Ethics vs. Law, and Corporate Governance.",
-                                        "Overall Analysis: A clash between legislature and judiciary, impact on all stakeholders (parties, ECI, citizens)."
-                                    ]
-                                }
-                            },
-                            questions: []
-                        },
-                        {  
-                            type: 'mcq',
-                            name: 'Test 3: NCERT Foundation Quiz',  
-                            icon: '📚',  
-                            description: 'This test will check how strong your NCERT basics are.',
-                            summaryMessage: "Great! Your foundation is strong. Now it's time to build the rest of the structure.",  
-                            questions: [  
-                                { question: 'In which script were most of Ashoka\'s inscriptions written?', options: ['(A) Sanskrit', '(B) Prakrit', '(C) Brahmi', '(D) Kharosthi'], correctAnswerIndex: 2, selectedAnswerIndex: null },
-                                { question: 'Which layer beneath the Earth\'s crust is made of molten rocks on which the plates float?', options: ['(A) Core', '(B) Mantle', '(C) Outer Crust', '(D) Lithosphere'], correctAnswerIndex: 1, selectedAnswerIndex: null },
-                                { question: 'Which part of the Indian Constitution is called the \'Soul of the Constitution\' but is not legally enforceable?', options: ['(A) Fundamental Rights', '(B) Preamble', '(C) Fundamental Duties', '(D) DPSP'], correctAnswerIndex: 1, selectedAnswerIndex: null },
-                            ]  
-                        },
-                        {  
-                            type: 'mcq',
-                            name: 'Test 4: PYQs Challenge',  
-                            icon: '🎯',  
-                            description: 'This challenge will test your art of elimination.',
-                            summaryMessage: "Very good! You are starting to understand the pattern of the exam.",  
-                            questions: [  
-                                { question: '(UPSC PYQ) In essence, what does \'Due Process of Law\' mean?', options: ['(A) The principle of natural justice', '(B) The procedure established by law', '(C) Fair application of law', '(D) Equality before law'], correctAnswerIndex: 2, selectedAnswerIndex: null },
-                            ]  
-                        },
-                        {  
-                            type: 'structure',
-                            name: 'Test 5: The First Step of Answer Writing',  
-                            icon: '✍️',  
-                            description: 'This test will assess your ability to create a top-scoring answer structure.',
-                            summaryMessage: "This is a crucial skill. Keep practicing to master it.",  
-                            question: {
-                                title: 'Question (GS-2, 150 words):',
-                                text: 'How have the steps taken under the "Digital India Program" helped in the empowerment of citizens? Discuss.'
-                            },
-                            idealStructure: {
-                                title: "Testology's Ideal Structure",
-                                intro: {
-                                    title: "1. Introduction (2 lines):",
-                                    text: "Define the Digital India Mission + its objective (e.g., access to Govt services)."
-                                },
-                                body: {
-                                    title: "2. Body (Empowerment Points):",
-                                    points: [
-                                        "Transparency: DBT stopping leakages.",
-                                        "Financial Inclusion: Jan-Dhan + Aadhaar + Mobile (JAM) trinity.",
-                                        "Access: Common Service Centers (CSC) + UMANG App.",
-                                        "Education/Health: DIKSHA portal + Telemedicine.",
-                                        "Accountability: Online Grievance Redressal."
-                                    ]
-                                },
-                                conclusion: {
-                                    title: "3. Conclusion (Forward-looking):",
-                                    text: "Acknowledge the challenge of the 'digital divide' while emphasizing the future of 'Technology for Transformation'."
-                                }
-                            },
-                            questions: []
-                        },
-                    ],
-                    hi: [
-                        {  
-                            type: 'mindset',
-                            name: 'टेस्ट 1: UPSC माइंडसेट टेस्ट',  
-                            icon: '🧠',  
-                            description: 'यह टेस्ट आपके Mindset, धैर्य और Motivation को परखेगा।',
-                            summaryMessage: "बहुत बढ़िया! मानसिक दृढ़ता सफलता की पहली सीढ़ी है। आपका माइंडसेट ही आपकी सबसे बड़ी ताकत है।",  
-                            questions: [
-                                { question: 'क्या आपके पास Civil Servant बनने का कोई एक बहुत मज़बूत कारण है, जो सिर्फ \'Power\', \'Prestige\' या \'Social Status\' से बढ़कर हो?', options: ['हाँ', 'नहीं'], correctAnswerIndex: 0, selectedAnswerIndex: null },
-                                { question: 'क्या आप अगले 365 दिन, बिना किसी बाहरी दबाव के, रोज़ 6-8 घंटे की self-study का routine follow कर सकते हैं?', options: ['हाँ', 'नहीं'], correctAnswerIndex: 0, selectedAnswerIndex: null },
-                                { question: 'अगर आपको पहले प्रयास में सफलता नहीं मिली, तो क्या आप अपनी गलतियों से सीखकर दोगुनी मेहनत से फिर से तैयारी करेंगे?', options: ['हाँ', 'नहीं'], correctAnswerIndex: 0, selectedAnswerIndex: null },
-                                { question: 'यह यात्रा अक्सर अकेली होती है। क्या आप इस अकेलेपन के लिए तैयार हैं?', options: ['हाँ', 'नहीं'], correctAnswerIndex: 0, selectedAnswerIndex: null },
-                                { question: 'When relatives or friends doubt your abilities, can you turn it into your motivation?', options: ['हाँ', 'नहीं'], correctAnswerIndex: 0, selectedAnswerIndex: null },
-                                { question: 'क्या आप अपनी गलतियों को स्वीकार करने और feedback लेकर खुद को सुधारने के लिए तैयार हैं?', options: ['हाँ', 'नहीं'], correctAnswerIndex: 0, selectedAnswerIndex: null },
-                                { question: 'क्या आप असफलता, तनाव और दबाव को manage करने की कोई रणनीति जानते हैं?', options: ['हाँ', 'नहीं'], correctAnswerIndex: 0, selectedAnswerIndex: null },
-                                { question: 'क्या आप अगले 1-2 साल के लिए अपनी social life, hobbies और मनोरंजन को स्वेच्छा से सीमित करने के लिए तैयार हैं?', options: ['हाँ', 'नहीं'], correctAnswerIndex: 0, selectedAnswerIndex: null },
-                                { question: 'जब आप कोई टॉपिक पढ़ते हैं, तो क्या आपके मन में \'क्यों\', \'कैसे\', \'क्या प्रभाव पड़ेगा\' जैसे सवाल स्वाभाविक रूप से उठते हैं?', options: ['हाँ', 'नहीं'], correctAnswerIndex: 0, selectedAnswerIndex: null },
-                                { question: 'क्या आप रोज़ लगातार 7 घंटे पढ़ने की क्षमता रखते हैं (बजाय 2 दिन 14 घंटे और 4 दिन छुट्टी के)?', options: ['हाँ', 'नहीं'], correctAnswerIndex: 0, selectedAnswerIndex: null }
-                            ]  
-                        },
-                        {  
-                            type: 'litmus',
-                            name: 'टेस्ट 2: अखबार पढ़ने का लिटमस टेस्ट',  
-                            icon: '📰',  
-                            description: 'यह परखेगा कि आप एक खबर को एक आम नागरिक की तरह देखते हैं या एक IAS Aspirant की तरह।',
-                            summaryMessage: "आत्म-चिंतन महत्वपूर्ण है। आप कैसे सोचते हैं इसका विश्लेषण करना अंक प्राप्त करने से अधिक महत्वपूर्ण है।",
-                            article: {
-                                headline: "सुप्रीम कोर्ट ने चुनावी बॉन्ड योजना को असंवैधानिक घोषित किया, पारदर्शिता को बताया लोकतंत्र का आधार।",
-                                citizenView: {
-                                    title: "एक आम नागरिक का नजरिया:",
-                                    points: [
-                                        "अरे वाह! सुप्रीम कोर्ट ने बहुत अच्छा काम किया।",
-                                        "अब नेताओं को काला धन नहीं मिलेगा।",
-                                        "यह सरकार की बहुत बड़ी हार है।"
-                                    ]
-                                },
-                                aspirantView: {
-                                    title: "एक IAS Aspirant का नजरिया (बहु-आयामी):",
-                                    points: [
-                                        "प्रीलिम्स के तथ्य: अनुच्छेद 19(1)(a) - जानने का अधिकार, न्यायिक समीक्षा से लिंक।",
-                                        "मेन्स GS-2: 'शासन में पारदर्शिता' और 'चुनाव सुधार' के लिए बेहतरीन उदाहरण।",
-                                        "मेन्स GS-4 (एथिक्स): सत्यनिष्ठा, कानून बनाम नैतिकता, और कॉर्पोरेट गवर्नेंस पर सवाल उठाता है।",
-                                        "समग्र विश्लेषण: विधायिका और न्यायपालिका के बीच टकराव, सभी हितधारकों (दल, ECI, नागरिक) पर प्रभाव।"
-                                    ]
-                                }
-                            },
-                            questions: []
-                        },
-                        {  
-                            type: 'mcq',
-                            name: 'टेस्ट 3: NCERT फाउंडेशन क्विज',  
-                            icon: '📚',  
-                            description: 'यह टेस्ट जांचेगा कि आपके NCERT के बेसिक्स कितने मज़बूत हैं।',
-                            summaryMessage: "शानदार! आपकी नींव मजबूत है। अब बस इमारत खड़ी करनी है।",  
-                            questions: [  
-                                { question: 'अशोक के अधिकांश अभिलेख (Inscriptions) किस लिपि (Script) में लिखे गए थे?', options: ['(A) संस्कृत', '(B) प्राकृत', '(C) ब्राह्मी', '(D) खरोष्ठी'], correctAnswerIndex: 2, selectedAnswerIndex: null },
-                                { question: 'पृथ्वी के क्रस्ट (Crust) के नीचे वह परत कौन सी है जो पिघली हुई चट्टानों (Molten Rocks) से बनी है?', options: ['(A) कोर (Core)', '(B) मेंटल (Mantle)', '(C) बाह्य क्रस्ट (Outer Crust)', '(D) स्थलमंडल (Lithosphere)'], correctAnswerIndex: 1, selectedAnswerIndex: null },
-                                { question: 'भारतीय संविधान का वह कौन सा भाग है, जिसे \'संविधान की आत्मा\' कहा जाता है, लेकिन यह कानूनी रूप से लागू करने योग्य (Enforceable) नहीं है?', options: ['(A) मौलिक अधिकार', '(B) प्रस्तावना (Preamble)', '(C) मौलिक कर्तव्य', '(D) निर्देशक सिद्धांत (DPSP)'], correctAnswerIndex: 1, selectedAnswerIndex: null },
-                            ]  
-                        },
-                        {  
-                            type: 'mcq',
-                            name: 'Test 4: PYQs Challenge',  
-                            icon: '🎯',  
-                            description: 'यह चैलेंज आपकी एलिमिनेशन की कला को जाँचेगा।',
-                            summaryMessage: "बहुत अच्छे! आप परीक्षा के पैटर्न को समझने लगे हैं।",  
-                            questions: [  
-                                { question: '(UPSC PYQ) \'विधि की सम्यक प्रक्रिया\' (Due Process of Law) का सार क्या है?', options: ['(A) प्राकृतिक न्याय का सिद्धांत', '(B) विधि द्वारा स्थापित प्रक्रिया', '(C) विधि का निष्पक्ष अनुप्रयोग', '(D) विधि के समक्ष समानता'], correctAnswerIndex: 2, selectedAnswerIndex: null },
-                            ]  
-                        },
-                        {  
-                            type: 'structure',
-                            name: 'टेस्ट 5: उत्तर लेखन की पहली सीढ़ी',  
-                            icon: '✍️',  
-                            description: 'यह टेस्ट एक टॉप-स्कोरिंग उत्तर की संरचना बनाने की क्षमता को परखेगा।',
-                            summaryMessage: "यह एक महत्वपूर्ण कौशल है। इसमें महारत हासिल करने के लिए अभ्यास करते रहें।",  
-                            question: {
-                                title: 'प्रश्न (GS-2, 150 शब्द):',
-                                text: '"डिजिटल इंडिया कार्यक्रम" के तहत उठाए गए कदमों ने नागरिकों के सशक्तिकरण में कैसे मदद की है? चर्चा कीजिए।'
-                            },
-                            idealStructure: {
-                                title: "Testology की आदर्श संरचना",
-                                intro: {
-                                    title: "1. परिचय (2 पंक्तियाँ):",
-                                    text: "डिजिटल इंडिया मिशन को परिभाषित करें + इसका उद्देश्य (जैसे - सरकारी सेवाओं तक पहुँच) बताएं।"
-                                },
-                                body: {
-                                    title: "2. मुख्य भाग (सशक्तिकरण के बिंदु):",
-                                    points: [
-                                        "पारदर्शिता: डीबीटी (DBT) से लीकेज बंद।",
-                                        "वित्तीय समावेशन: जन-धन + आधार + मोबाइल (JAM) ट्रिनिटी।",
-                                        "पहुँच: कॉमन सर्विस सेंटर (CSC) + उमंग (UMANG) ऐप।",
-                                        "शिक्षा/स्वास्थ्य: दीक्षा पोर्टल + टेलीमेडिसिन।",
-                                        "जवाबदेही: ऑनलाइन शिकायत निवारण।"
-                                    ]
-                                },
-                                conclusion: {
-                                    title: "3. निष्कर्ष (भविष्योन्मुखी):",
-                                    text: "'डिजिटल डिवाइड' की चुनौती को स्वीकार करते हुए, 'परिवर्तन के लिए प्रौद्योगिकी' के भविष्य पर ज़ोर दें।"
-                                }
-                            },
-                            questions: []
-                        },
-                    ]
-                },
-
-                init() {
-                    this.$watch('showDiagnostic', (value) => {
-                        if (value) { this.resetTest(); }
-                    });
-                },
-
-                resetTest() {
-                    this.currentView = 'languageSelection';
-                    this.language = 'en';
-                    this.currentSectionIndex = 0;
-                    this.currentQuestionIndex = 0;
-                    this.sectionScores = [];
-                    for (const lang in this.sections) {
-                        this.sections[lang].forEach(section => {
-                            if (section.questions.length > 0) {
-                                section.questions.forEach(q => q.selectedAnswerIndex = null);
-                            }
-                        });
-                    }
-                },
-
-                setLanguage(lang) {
-                    this.language = lang;
-                    this.currentView = 'overview';
-                },
-
-                get activeSections() { return this.sections[this.language]; },
-                
-                get totalQuestions() {  
-                    return this.activeSections.reduce((total, section) => {
-                        if (section.type === 'mindset' || section.type === 'mcq') {
-                            return total + section.questions.length;
-                        }
-                        return total;
-                    }, 0);  
-                },
-
-                get progressPercentage() {
-                    let questionsAnswered = 0;
-                    let totalQuizQuestions = this.totalQuestions;
-                    if (totalQuizQuestions === 0) return 0;
-                    for(let i = 0; i < this.currentSectionIndex; i++) {  
-                        if (this.activeSections[i].type === 'mcq' || this.activeSections[i].type === 'mindset') {
-                            questionsAnswered += this.activeSections[i].questions.length;
-                        }
-                    }
-                    if(this.currentSection().type === 'mcq' || this.currentSection().type === 'mindset') {
-                        questionsAnswered += this.currentQuestionIndex;
-                    }
-                    return (questionsAnswered / totalQuizQuestions) * 100;
-                },
-
-                currentSection() { return this.activeSections[this.currentSectionIndex]; },
-                currentQuestion() { return this.currentSection().questions[this.currentQuestionIndex]; },
-                selectAnswer(index) { this.currentQuestion().selectedAnswerIndex = index; },
-                isLastQuestionOfSection() { return this.currentQuestionIndex === this.currentSection().questions.length - 1; },
-                isLastSection() { return this.currentSectionIndex === this.activeSections.length - 1; },
-
-                next() {
-                    const sectionType = this.currentSection().type;
-                    if (sectionType === 'mcq' || sectionType === 'mindset') {
-                        if (this.currentQuestion().selectedAnswerIndex === null) {  
-                            alert(this.language === 'hi' ? 'कृपया एक उत्तर चुनें।' : 'Please select an answer.');  
-                            return;  
-                        }
-                        if (this.isLastQuestionOfSection()) {
-                            this.sectionScores.push(this.calculateSectionScore());
-                            this.currentView = 'summary';
-                        } else { this.currentQuestionIndex++; }
-                    } else {
-                        this.sectionScores.push(null);  
-                            this.currentView = 'summary';
-                    }
-                },
-                
-                nextSection() {
-                    if (this.isLastSection()) { this.currentView = 'report'; }  
-                    else {
-                        this.currentSectionIndex++;
-                        this.currentQuestionIndex = 0;
-                        this.currentView = 'test';
-                    }
-                },
-
-                calculateSectionScore() {  
-                    const section = this.currentSection();
-                    if (section.type === 'mindset') { return section.questions.filter(q => q.selectedAnswerIndex === 0).length; }
-                    if (section.type === 'mcq') { return section.questions.filter(q => q.selectedAnswerIndex === q.correctAnswerIndex).length; }
-                    return null;
-                },
-
-                calculateTotalScore() { return this.sectionScores.reduce((total, score) => total + (score || 0), 0); },
-
-                getProfile() {
-                    const mindsetScore = this.sectionScores[0];
-                    if (this.language === 'hi') {
-                        if (mindsetScore >= 7) return "द ऑफिसर माइंडसेट 🎖️";
-                        if (mindsetScore >= 4) return "दृढ़ निश्चयी एस्पिरेंट 💪";
-                        return "ईमानदार शुरुआत करने वाला 🌱";
-                    }
-                    if (mindsetScore >= 7) return "The Officer Mindset 🎖️";
-                    if (mindsetScore >= 4) return "The Determined Aspirant 💪";
-                    return "The Honest Beginner 🌱";
-                },
-                
-                getDetailedFeedback() {
-                    return this.activeSections.map((section, index) => {
-                          const score = this.sectionScores[index];
-                          const total = section.questions.length;
-                          let analysis, nextStep;
-                          if (this.language === 'hi') {
-                              if (section.type === 'mindset') {
-                                  if (score >= 7) analysis = 'बहुत बढ़िया! आपका Mindset एक ऑफिसर जैसा है।';
-                                  else if (score >= 4) analysis = 'यह बिल्कुल सामान्य है! यह वो area है जहाँ आपको काम करना है।';
-                                  else analysis = 'आपकी ईमानदारी के लिए बधाई! यह आत्म-चिंतन का एक शानदार अवसर है।';
-                                  nextStep = 'इन सवालों पर विचार करें और अपनी mental strength बनाने पर ध्यान दें।';
-                              } else if (section.type === 'mcq') {
-                                 analysis = (score / total >= 0.7) ? 'आपकी समझ इस क्षेत्र में अच्छी है।' : 'इस क्षेत्र में आपको और ध्यान देने की आवश्यकता है।';
-                                 nextStep = (score / total >= 0.7) ? 'इस गति को बनाए रखें और उन्नत विषयों का अभ्यास करें।' : 'बुनियादी अवधारणाओं को फिर से पढ़ें और अभ्यास करें।';
-                              } else {
-                                 analysis = "यह एक आत्म-चिंतन अभ्यास था। उद्देश्य अपनी सोच प्रक्रिया को समझना था।";
-                                 nextStep = "इस अभ्यास से मिली सीख को अपनी तैयारी की रणनीति में शामिल करें।";
-                              }
-                          } else {
-                              if (section.type === 'mindset') {
-                                  if (score >= 7) analysis = 'Excellent! Your mindset is like that of an officer.';
-                                  else if (score >= 4) analysis = 'This is quite normal! This is an area you need to work on.';
-                                  else analysis = 'Congratulations on your honesty! This is a great opportunity for self-reflection.';
-                                  nextStep = 'Reflect on these questions and focus on building your mental strength.';
-                              } else if (section.type === 'mcq') {
-                                 analysis = (score / total >= 0.7) ? 'Your understanding in this area is good.' : 'You need to pay more attention to this area.';
-                                 nextStep = (score / total >= 0.7) ? 'Maintain this pace and practice advanced topics.' : 'Re-read the basic concepts and practice more.';
-                              } else {
-                                 analysis = "This was a self-reflection exercise. The goal was to understand your thought process.";
-                                 nextStep = "Incorporate the learnings from this exercise into your preparation strategy.";
-                              }
-                          }
-                          return { title: section.name, analysis: analysis, nextStep: nextStep, score: score, total: total, type: section.type };
-                    });
-                }
-            }
-        }
-        
-        function prelimsPulse() {
-            const today = new Date().toISOString().slice(0, 10);  
-            
-            // Mock Data agar Google Sheet se error aaye
-            const MOCK_QUESTION = {
-                date: today,
-                question: { en: 'Error: Data loading issue. Please check Google Sheet.', hi: 'त्रुटि: डेटा लोड होने में समस्या। Google Sheet जाँचें।' },
-                options: { en: ['A) Check Sheet', 'B) Check Semicolons'], hi: ['A) शीट देखें', 'B) सेमिकोलन जाँचें'] },
-                correctAnswerIndex: 0,
-                explanation: { en: 'The sheet data could not be parsed successfully.', hi: 'शीट का डेटा सफलतापूर्वक पार्स नहीं हो पाया।' }
-            };
-
-            return {
-                allQuestions: {},  
-                isLoading: true,  
-                language: 'en',
-                flipped: false,
-                selectedAnswerIndex: null,
-                isCorrect: false,
-                feedbackMessage: {
-                    correct: { en: "Brilliant! Your analysis was spot on.", hi: "शानदार! आपका विश्लेषण सटीक था..." },
-                    incorrect: { en: "No worries! Best students learn from their mistakes.", hi: "कोई बात नहीं! सर्वश्रेष्ठ छात्र अपनी गलतियों से ही सीखते हैं..." }
-                },
-
-                // 🌟 FIX: Question Data Getter (Aaj ka Question Dhoondhna)
-                get questionData() {
-                    const question = this.allQuestions[today];
-                    
-                    if (!this.isLoading && !question) {
-                        const firstKey = Object.keys(this.allQuestions)[0];
-                        return this.allQuestions[firstKey] || MOCK_QUESTION;
-                    }
-                    
-                    if (question) {
-                        return question;
-                    }
-                    
-                    return null; // Jab tak loading ho rahi hai
-                },
-
-                // FIX: Data Fetching aur Parsing Logic
-                async fetchQuestions() {
-                    this.isLoading = true;
-                    const SHEET_URL = PRELIMS_SHEET_URL;  
-                    
-                    try {
-                        const response = await fetch(SHEET_URL);
-                        const csvText = await response.text();
-                        
-                        const rows = csvText.trim().split('\n').filter(row => row.trim() !== '');
-                        if (rows.length < 2) throw new Error("Sheet is empty or has only headers.");
-                        
-                        const parsedQuestions = rows.slice(1).map(row => {
-                            const values = row.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || [];
-                            const cleanedValues = values.map(value => value.trim().replace(/^"|"$/g, ''));
-
-                            // Index-Based Parsing (A=0, B=1, C=2...)
-                            return {
-                                date: cleanedValues[0], // A
-                                question: { en: cleanedValues[1], hi: cleanedValues[3] }, // B, D
-                                options: {
-                                    en: cleanedValues[2] ? cleanedValues[2].split(';').map(opt => opt.trim()) : [], // C (Semicolon Split)
-                                    hi: cleanedValues[4] ? cleanedValues[4].split(';').map(opt => opt.trim()) : []  // E (Semicolon Split)
-                                },
-                                correctAnswerIndex: parseInt(cleanedValues[5], 10), // F
-                                explanation: { en: cleanedValues[6], hi: cleanedValues[7] } // G, H
-                            };
-                        }).filter(q => q.question.en && q.date && q.correctAnswerIndex >= 0);
-
-                        // Date-based map banana
-                        this.allQuestions = parsedQuestions.reduce((acc, question) => {
-                            acc[question.date] = question;
-                            return acc;
-                        }, {});
-
-                    } catch (error) {
-                        console.error("Error fetching sheet data:", error);
-                        this.allQuestions = {};
-                    } finally {
-                        this.isLoading = false;
-                    }
-                },
-
-                toggleLanguage() {  
-                    this.language = this.language === 'en' ? 'hi' : 'en';  
-                    this.flipped = false;
-                    this.selectedAnswerIndex = null;
-                },
-                lockAnswer() {
-                    if (this.selectedAnswerIndex !== null) {
-                        this.isCorrect = this.selectedAnswerIndex === this.questionData.correctAnswerIndex;
-                        this.flipped = true;
-                    }
-                },
-                init() {
-                    this.fetchQuestions();
                 }
             }
         }
